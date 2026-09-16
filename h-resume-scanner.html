@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Career Twin — Resume Scanner</title>
+
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+:root {
+    --purple: #EBA3FB;
+    --purple-dark: #D77BEF;
+    --cream: #FFF7E8;
+    --plum: #35143D;
+    --sage: #A8C3A0;
+    --white: #FFFFFF;
+    --light-purple: #F6DDFB;
+    --border: #ead7ec;
+}
+
+body {
+    background: var(--cream);
+    color: var(--plum);
+}
+
+
+/* NAVBAR */
+
+nav {
+    height: 72px;
+    background: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 45px;
+
+    border-bottom: 1px solid var(--border);
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: 800;
+}
+
+.logo span {
+    color: var(--purple-dark);
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--plum);
+    font-weight: 600;
+}
+
+.profile {
+    background: var(--light-purple);
+    padding: 10px 16px;
+    border-radius: 25px;
+    font-weight: bold;
+}
+
+
+/* MAIN */
+
+main {
+    max-width: 1250px;
+    margin: auto;
+    padding: 40px 25px;
+}
+
+.heading {
+    margin-bottom: 30px;
+}
+
+.heading h1 {
+    font-size: 36px;
+    margin-bottom: 8px;
+}
+
+.heading p {
+    color: #765d79;
+}
+
+
+/* LAYOUT */
+
+.scanner-layout {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 25px;
+}
+
+
+/* SCANNER PANEL */
+
+.scanner {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    padding: 25px;
+    height: fit-content;
+}
+
+.scanner h2 {
+    margin-bottom: 8px;
+}
+
+.scanner-description {
+    color: #765d79;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 25px;
+}
+
+
+/* PROFILE DATA */
+
+.data-section {
+    margin-bottom: 25px;
+}
+
+.data-section h3 {
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+
+.data-box {
+    background: #fffaf0;
+    border: 1px solid var(--border);
+    padding: 13px;
+    border-radius: 10px;
+    margin-bottom: 7px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.data-box span {
+    font-size: 14px;
+}
+
+.checked {
+    color: #64835d;
+    font-weight: bold;
+}
+
+
+/* SCAN BUTTON */
+
+.generate {
+    width: 100%;
+    padding: 15px;
+
+    border: none;
+    border-radius: 12px;
+
+    background: var(--plum);
+    color: white;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.generate:hover {
+    background: #51235c;
+}
+
+
+/* RESUME PREVIEW */
+
+.resume-area {
+    background: #eee7ee;
+    border-radius: 22px;
+    padding: 30px;
+
+    min-height: 700px;
+}
+
+.resume-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 20px;
+}
+
+.resume-header h2 {
+    font-size: 21px;
+}
+
+.status {
+    background: var(--sage);
+    padding: 8px 14px;
+    border-radius: 20px;
+
+    font-size: 13px;
+    font-weight: bold;
+}
+
+
+/* RESUME */
+
+.resume {
+    background: white;
+
+    max-width: 750px;
+    min-height: 900px;
+
+    margin: auto;
+
+    padding: 45px;
+
+    box-shadow: 0 5px 25px rgba(53,20,61,0.08);
+}
+
+.resume-name {
+    font-size: 34px;
+    font-weight: 800;
+}
+
+.resume-role {
+    margin-top: 6px;
+    color: var(--purple-dark);
+    font-weight: bold;
+}
+
+.contact {
+    margin-top: 10px;
+    color: #765d79;
+    font-size: 13px;
+}
+
+.resume-line {
+    height: 2px;
+    background: var(--purple);
+    margin: 20px 0;
+}
+
+.resume-section {
+    margin-bottom: 22px;
+}
+
+.resume-section h3 {
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+
+    margin-bottom: 10px;
+
+    color: var(--plum);
+}
+
+.resume-section p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #49354d;
+}
+
+
+/* SKILLS */
+
+.skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.skill-tag {
+    background: var(--light-purple);
+    padding: 6px 10px;
+
+    border-radius: 7px;
+
+    font-size: 12px;
+    font-weight: bold;
+}
+
+
+/* PROJECT */
+
+.project {
+    margin-bottom: 13px;
+}
+
+.project-title {
+    font-weight: bold;
+}
+
+.project-description {
+    font-size: 13px;
+    color: #765d79;
+    margin-top: 4px;
+}
+
+
+/* BUTTONS */
+
+.resume-actions {
+    max-width: 750px;
+    margin: 20px auto 0;
+
+    display: flex;
+    gap: 10px;
+}
+
+.action-button {
+    flex: 1;
+
+    padding: 13px;
+
+    border-radius: 10px;
+
+    border: 1px solid var(--border);
+
+    background: white;
+
+    cursor: pointer;
+
+    font-weight: bold;
+}
+
+.action-button.primary {
+    background: var(--plum);
+    color: white;
+}
+
+
+/* SCAN ANIMATION */
+
+.scanning {
+    display: none;
+
+    text-align: center;
+
+    padding: 20px;
+
+    color: var(--purple-dark);
+
+    font-weight: bold;
+}
+
+
+/* RESPONSIVE */
+
+@media(max-width:900px) {
+
+    .scanner-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+}
+
+@media(max-width:600px) {
+
+    nav {
+        padding: 0 20px;
+    }
+
+    main {
+        padding: 25px 15px;
+    }
+
+    .heading h1 {
+        font-size: 28px;
+    }
+
+    .resume {
+        padding: 25px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- NAVBAR -->
+
+<nav>
+
+    <div class="logo">
+        Career<span>Twin</span>
+    </div>
+
+    <div class="nav-links">
+
+        <a href="e-careertwin.html">Dashboard</a>
+        <a href="#">Skills</a>
+        <a href="#">Skill Passport</a>
+        <a href="#">Resume</a>
+
+    </div>
+
+    <div class="profile">
+        👩‍💻 Alex
+    </div>
+
+</nav>
+
+
+
+<main>
+
+
+<!-- HEADING -->
+
+<section class="heading">
+
+    <h1>📄 Resume Scanner</h1>
+
+    <p>
+        Career Twin scans your Skill Passport and automatically
+        builds a resume based on your experience.
+    </p>
+
+</section>
+
+
+
+<div class="scanner-layout">
+
+
+
+<!-- LEFT PANEL -->
+
+<section class="scanner">
+
+    <h2>🧠 Your Career Data</h2>
+
+    <p class="scanner-description">
+        We've found the following information in your
+        Career Twin profile.
+    </p>
+
+
+    <!-- SKILLS -->
+
+    <div class="data-section">
+
+        <h3>Skills</h3>
+
+        <div class="data-box">
+            <span>C++</span>
+            <span class="checked">✓</span>
+        </div>
+
+        <div class="data-box">
+            <span>Python</span>
+            <span class="checked">✓</span>
+        </div>
+
+        <div class="data-box">
+            <span>Data Structures</span>
+            <span class="checked">✓</span>
+        </div>
+
+        <div class="data-box">
+            <span>Git & GitHub</span>
+            <span class="checked">✓</span>
+        </div>
+
+    </div>
+
+
+
+    <!-- PROJECTS -->
+
+    <div class="data-section">
+
+        <h3>Projects</h3>
+
+        <div class="data-box">
+            <span>Portfolio Website</span>
+            <span class="checked">✓</span>
+        </div>
+
+        <div class="data-box">
+            <span>Student Tracker</span>
+            <span class="checked">✓</span>
+        </div>
+
+    </div>
+
+
+
+    <!-- CERTIFICATIONS -->
+
+    <div class="data-section">
+
+        <h3>Certifications</h3>
+
+        <div class="data-box">
+            <span>Python Certification</span>
+            <span class="checked">✓</span>
+        </div>
+
+    </div>
+
+
+
+    <!-- SCANNING -->
+
+    <div class="scanning" id="scanning">
+
+        🔍 Scanning your career profile...
+
+    </div>
+
+
+
+    <button
+        class="generate"
+        onclick="generateResume()">
+
+        ✨ Generate My Resume
+
+    </button>
+
+</section>
+
+
+
+
+<!-- RIGHT SIDE -->
+
+<section class="resume-area">
+
+
+    <div class="resume-header">
+
+        <h2>Resume Preview</h2>
+
+        <div class="status">
+            AI Generated
+        </div>
+
+    </div>
+
+
+
+    <!-- RESUME -->
+
+    <div class="resume" id="resume">
+
+
+        <div class="resume-name">
+            Alex Sharma
+        </div>
+
+        <div class="resume-role">
+            Aspiring Software Engineer
+        </div>
+
+        <div class="contact">
+            alex@email.com • India • GitHub • LinkedIn
+        </div>
+
+
+
+        <div class="resume-line"></div>
+
+
+
+        <!-- SUMMARY -->
+
+        <div class="resume-section">
+
+            <h3>Profile</h3>
+
+            <p>
+
+                Computer Science student with experience in
+                programming, web development and problem solving.
+                Currently developing skills in C++, Python and
+                Data Structures with a strong interest in
+                software engineering.
+
+            </p>
+
+        </div>
+
+
+
+        <!-- SKILLS -->
+
+        <div class="resume-section">
+
+            <h3>Technical Skills</h3>
+
+            <div class="skills">
+
+                <span class="skill-tag">C++</span>
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">Data Structures</span>
+                <span class="skill-tag">Git & GitHub</span>
+                <span class="skill-tag">HTML</span>
+                <span class="skill-tag">CSS</span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- PROJECTS -->
+
+        <div class="resume-section">
+
+            <h3>Projects</h3>
+
+
+            <div class="project">
+
+                <div class="project-title">
+                    Portfolio Website
+                </div>
+
+                <div class="project-description">
+
+                    Designed and developed a responsive personal
+                    portfolio website showcasing technical skills,
+                    projects and achievements.
+
+                </div>
+
+            </div>
+
+
+
+            <div class="project">
+
+                <div class="project-title">
+                    Student Career Tracker
+                </div>
+
+                <div class="project-description">
+
+                    Developed a dashboard for tracking student
+                    skills, projects, certifications and career
+                    progress.
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- CERTIFICATIONS -->
+
+        <div class="resume-section">
+
+            <h3>Certifications</h3>
+
+            <p>
+                Python Programming Certification
+            </p>
+
+        </div>
+
+
+
+        <!-- EDUCATION -->
+
+        <div class="resume-section">
+
+            <h3>Education</h3>
+
+            <p>
+
+                B.Tech — Computer Science Engineering<br>
+                The NorthCap University
+
+            </p>
+
+        </div>
+
+
+
+    </div>
+
+
+
+    <!-- ACTIONS -->
+
+    <div class="resume-actions">
+
+        <button
+            class="action-button"
+            onclick="window.print()">
+
+            🖨 Print / Save PDF
+
+        </button>
+
+
+        <button
+            class="action-button primary"
+            onclick="alert('Resume customization coming soon!')">
+
+            ✨ Customize
+
+        </button>
+
+    </div>
+
+
+</section>
+
+</div>
+
+</main>
+
+
+
+<script>
+
+
+function generateResume() {
+
+    const scanning =
+        document.getElementById("scanning");
+
+    const button =
+        document.querySelector(".generate");
+
+
+    scanning.style.display = "block";
+
+    button.disabled = true;
+
+    button.innerHTML = "Scanning...";
+
+
+    setTimeout(function() {
+
+        scanning.innerHTML =
+            "✨ Resume generated successfully!";
+
+        button.disabled = false;
+
+        button.innerHTML =
+            "✓ Resume Generated";
+
+    }, 1800);
+
+}
+
+
+</script>
+
+
+</body>
+</html>

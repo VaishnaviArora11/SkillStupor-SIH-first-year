@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Twin</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        :root {
+            --primary: #cfa3fb;
+            --primary-dark: #eba3fb;
+            --background: #FFF7E8;
+            --text: #35143D;
+            --sage: #A8C3A0;
+            --white: #FFFFFF;
+            --light-purple: #F6DDFB;
+            --border: #ead7ec;
+        }
+
+        body {
+            background: var(--background);
+            color: var(--text);
+        }
+
+        /* NAVBAR */
+
+        nav {
+            height: 75px;
+            background: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 50px;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: 800;
+        }
+
+        .logo span {
+            color: var(--primary-dark);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        nav a:hover {
+            color: var(--primary-dark);
+        }
+
+        .profile {
+            background: var(--light-purple);
+            padding: 10px 16px;
+            border-radius: 30px;
+            font-weight: bold;
+        }
+
+        /* MAIN */
+
+        main {
+            max-width: 1250px;
+            margin: auto;
+            padding: 40px 25px;
+        }
+
+        .welcome {
+            margin-bottom: 30px;
+        }
+
+        .welcome h1 {
+            font-size: 36px;
+            margin-bottom: 8px;
+        }
+
+        .welcome p {
+            color: #765d79;
+        }
+
+        /* GOAL CARD */
+
+        .goal-card {
+            background: var(--text);
+            color: white;
+            border-radius: 25px;
+            padding: 30px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .goal-info {
+            flex: 1;
+        }
+
+        .goal-label {
+            color: var(--primary);
+            font-size: 14px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .goal-card h2 {
+            margin: 8px 0;
+            font-size: 28px;
+        }
+
+        .goal-card p {
+            color: #ddcfe0;
+        }
+
+        .goal-progress {
+            width: 420px;
+        }
+
+        .progress-top {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .progress-bar {
+            height: 18px;
+            background: #624769;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 64%;
+            background: var(--primary);
+            border-radius: 20px;
+        }
+
+        /* GRID */
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            padding: 25px;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 22px;
+        }
+
+        .card-header h2 {
+            font-size: 21px;
+        }
+
+        .view-all {
+            color: var(--primary-dark);
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* SKILLS */
+
+        .skill {
+            margin-bottom: 20px;
+        }
+
+        .skill-top {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .skill-name {
+            font-weight: bold;
+        }
+
+        .level {
+            font-size: 13px;
+            color: #806884;
+        }
+
+        .skill-bar {
+            height: 11px;
+            background: #f0e6f1;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .skill-fill {
+            height: 100%;
+            border-radius: 20px;
+            background: var(--primary);
+        }
+
+        .beginner {
+            width: 30%;
+        }
+
+        .intermediate {
+            width: 60%;
+        }
+
+        .advanced {
+            width: 82%;
+        }
+
+        .expert {
+            width: 95%;
+        }
+
+        /* TEST */
+
+        .test-card {
+            background: linear-gradient(135deg, #f9e8fc, #ffffff);
+        }
+
+        .test-info {
+            margin-bottom: 20px;
+        }
+
+        .test-info h3 {
+            margin-bottom: 7px;
+        }
+
+        .test-info p {
+            color: #765d79;
+            font-size: 14px;
+        }
+
+        /* LEVEL BAR */
+
+        .level-track {
+            display: flex;
+            gap: 7px;
+            margin: 25px 0;
+        }
+
+        .level-box {
+            height: 42px;
+            flex: 1;
+            border-radius: 8px;
+            background: #eadfea;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            color: #8d7890;
+        }
+
+        .level-box.active {
+            background: var(--primary);
+            color: var(--text);
+        }
+
+        .test-button {
+            width: 100%;
+            border: none;
+            background: var(--text);
+            color: white;
+            padding: 14px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .test-button:hover {
+            background: #51235c;
+        }
+
+        /* RESULTS */
+
+        .results-placeholder {
+            height: 180px;
+            border: 2px dashed #d8bfdc;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #8c758f;
+            padding: 20px;
+        }
+
+        .results-placeholder strong {
+            display: block;
+            color: var(--text);
+            margin-bottom: 5px;
+        }
+
+        /* SKILL PASSPORT */
+
+        .passport {
+            background: var(--white);
+            border-radius: 25px;
+            border: 1px solid var(--border);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .passport-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .passport-title h2 {
+            font-size: 26px;
+        }
+
+        .passport-title p {
+            color: #765d79;
+            margin-top: 5px;
+        }
+
+        .passport-badge {
+            background: var(--sage);
+            padding: 12px 18px;
+            border-radius: 30px;
+            font-weight: bold;
+        }
+
+        .passport-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .passport-item {
+            background: #fffaf0;
+            border: 1px solid var(--border);
+            padding: 20px;
+            border-radius: 16px;
+        }
+
+        .passport-item .icon {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .passport-item h3 {
+            margin-bottom: 5px;
+        }
+
+        .passport-item p {
+            color: #806884;
+            font-size: 14px;
+        }
+
+        /* ACTIVITY */
+
+        .activity {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .activity-card {
+            border: 1px solid var(--border);
+            padding: 20px;
+            border-radius: 16px;
+        }
+
+        .activity-card h3 {
+            margin-bottom: 8px;
+        }
+
+        .activity-card p {
+            color: #765d79;
+            font-size: 14px;
+        }
+
+        .tag {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 5px 10px;
+            border-radius: 20px;
+            background: var(--light-purple);
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        /* MODAL */
+
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(53, 20, 61, 0.6);
+            z-index: 200;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            width: 90%;
+            max-width: 550px;
+            padding: 30px;
+            border-radius: 25px;
+        }
+
+        .modal-content h2 {
+            margin-bottom: 10px;
+        }
+
+        .question {
+            margin: 20px 0;
+            font-weight: bold;
+        }
+
+        .options {
+            display: grid;
+            gap: 10px;
+        }
+
+        .option {
+            padding: 13px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .option:hover {
+            background: var(--light-purple);
+        }
+
+        .close {
+            float: right;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 850px) {
+
+            nav {
+                padding: 0 20px;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            .goal-card {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .goal-progress {
+                width: 100%;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .passport-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .activity {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            .passport-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .welcome h1 {
+                font-size: 28px;
+            }
+
+            main {
+                padding: 25px 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav>
+        <div class="logo">
+            Career<span>Twin</span>
+        </div>
+
+        <ul>
+          <li><a href="e-careertwin.html">Dashboard</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#passport">Skill Passport</a></li>
+          <li><a href="#tests">Tests</a></li>
+          <li><a href="h-resume-scanner.html">Resume</a></li>
+        </ul>
+
+        <div class="profile">
+            👩‍💻 Alex
+        </div>
+    </nav>
+
+
+    <main id="dashboard">
+
+        <!-- WELCOME -->
+
+        <section class="welcome">
+            <h1>Hey Alex! 👋</h1>
+            <p>Let's see how close your current skills are to your dream career.</p>
+        </section>
+
+
+        <!-- CAREER GOAL -->
+
+        <section class="goal-card">
+
+            <div class="goal-info">
+                <div class="goal-label">Current Career Goal</div>
+
+                <h2>Software Engineer @ Microsoft</h2>
+
+                <p>
+                    Your Career Twin is tracking your progress
+                    towards this goal.
+                </p>
+            </div>
+
+            <div class="goal-progress">
+
+                <div class="progress-top">
+                    <span>Career Readiness</span>
+                    <span>64%</span>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+
+                <p style="margin-top:10px; color:#ddcfe0;">
+                    You're getting there! 🚀
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- TWO COLUMN DASHBOARD -->
+
+        <section class="dashboard-grid">
+
+            <!-- SKILLS -->
+
+            <div class="card" id="skills">
+
+                <div class="card-header">
+                    <h2>🧠 Skill Tracker</h2>
+                    <span class="view-all">View all</span>
+                </div>
+
+
+                <div class="skill">
+
+                    <div class="skill-top">
+                        <span class="skill-name">C++</span>
+                        <span class="level">Intermediate</span>
+                    </div>
+
+                    <div class="skill-bar">
+                        <div class="skill-fill intermediate"></div>
+                    </div>
+
+                </div>
+
+
+                <div class="skill">
+
+                    <div class="skill-top">
+                        <span class="skill-name">Python</span>
+                        <span class="level">Advanced</span>
+                    </div>
+
+                    <div class="skill-bar">
+                        <div class="skill-fill advanced"></div>
+                    </div>
+
+                </div>
+
+
+                <div class="skill">
+
+                    <div class="skill-top">
+                        <span class="skill-name">Data Structures</span>
+                        <span class="level">Beginner</span>
+                    </div>
+
+                    <div class="skill-bar">
+                        <div class="skill-fill beginner"></div>
+                    </div>
+
+                </div>
+
+
+                <div class="skill">
+
+                    <div class="skill-top">
+                        <span class="skill-name">Git & GitHub</span>
+                        <span class="level">Intermediate</span>
+                    </div>
+
+                    <div class="skill-bar">
+                        <div class="skill-fill intermediate"></div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- TEST -->
+
+            <div class="card test-card" id="tests">
+
+                <div class="card-header">
+                    <h2>📝 Skill Test</h2>
+                    <span>10 min</span>
+                </div>
+
+                <div class="test-info">
+
+                    <h3>Test your C++ level</h3>
+
+                    <p>
+                        Take a quick assessment and let Career Twin
+                        update your skill level.
+                    </p>
+
+                </div>
+
+
+                <!-- LEVEL BAR -->
+
+                <div class="level-track">
+
+                    <div class="level-box active">
+                        LVL 1
+                    </div>
+
+                    <div class="level-box active">
+                        LVL 2
+                    </div>
+
+                    <div class="level-box active">
+                        LVL 3
+                    </div>
+
+                    <div class="level-box">
+                        LVL 4
+                    </div>
+
+                    <div class="level-box">
+                        LVL 5
+                    </div>
+
+                </div>
+
+
+                <p style="font-size:13px; margin-bottom:15px;">
+                    Current level: <strong>Level 3 — Intermediate</strong>
+                </p>
+
+
+                <button class="test-button" onclick="openTest()">
+                    Start Skill Test →
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- TEST RESULTS -->
+
+        <section class="card" style="margin-bottom:30px;">
+
+            <div class="card-header">
+                <h2>📊 Test Results</h2>
+                <span class="view-all">History</span>
+            </div>
+
+            <div class="results-placeholder">
+
+                <div>
+                    <strong>Your test results will appear here.</strong>
+
+                    Complete a Skill Test to see your score,
+                    strengths, weaknesses and updated level.
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- SKILL PASSPORT -->
+
+        <section class="passport" id="passport">
+
+            <div class="passport-header">
+
+                <div class="passport-title">
+
+                    <h2>🪪 Skill Passport</h2>
+
+                    <p>
+                        Your complete career profile — all in one place.
+                    </p>
+
+                </div>
+
+                <div class="passport-badge">
+                    ✨ Career Ready 64%
+                </div>
+
+            </div>
+
+
+            <div class="passport-grid">
+
+                <div class="passport-item">
+
+                    <div class="icon">🧠</div>
+
+                    <h3>Skills</h3>
+
+                    <p>8 skills tracked</p>
+
+                </div>
+
+
+                <div class="passport-item">
+
+                    <div class="icon">🚀</div>
+
+                    <h3>Projects</h3>
+
+                    <p>4 projects completed</p>
+
+                </div>
+
+
+                <div class="passport-item">
+
+                    <div class="icon">💼</div>
+
+                    <h3>Internships</h3>
+
+                    <p>1 internship</p>
+
+                </div>
+
+
+                <div class="passport-item">
+
+                    <div class="icon">🏆</div>
+
+                    <h3>Certifications</h3>
+
+                    <p>3 certifications</p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- RECENT ACTIVITY -->
+
+        <section class="card">
+
+            <div class="card-header">
+                <h2>📌 Career Activity</h2>
+                <span class="view-all">See timeline</span>
+            </div>
+
+
+            <div class="activity">
+
+                <div class="activity-card">
+
+                    <h3>Portfolio Website</h3>
+
+                    <p>
+                        Built and deployed your personal portfolio.
+                    </p>
+
+                    <span class="tag">Project</span>
+
+                </div>
+
+
+                <div class="activity-card">
+
+                    <h3>C++ Fundamentals</h3>
+
+                    <p>
+                        Completed arrays, loops and functions.
+                    </p>
+
+                    <span class="tag">Skill</span>
+
+                </div>
+
+
+                <div class="activity-card">
+
+                    <h3>Python Certification</h3>
+
+                    <p>
+                        Added a new certification to your passport.
+                    </p>
+
+                    <span class="tag">Certification</span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- TEST MODAL -->
+
+    <div class="modal" id="testModal">
+
+        <div class="modal-content">
+
+            <span class="close" onclick="closeTest()">×</span>
+
+            <h2>🧠 C++ Skill Test</h2>
+
+            <p style="color:#765d79;">
+                Question 1 of 5
+            </p>
+
+            <div class="question">
+                Which data structure follows the FIFO principle?
+            </div>
+
+            <div class="options">
+
+                <div class="option" onclick="answer('A')">
+                    A. Stack
+                </div>
+
+                <div class="option" onclick="answer('B')">
+                    B. Queue
+                </div>
+
+                <div class="option" onclick="answer('C')">
+                    C. Tree
+                </div>
+
+                <div class="option" onclick="answer('D')">
+                    D. Graph
+                </div>
+
+            </div>
+
+            <p id="testMessage"
+               style="margin-top:20px; font-weight:bold;">
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        function openTest() {
+            document.getElementById("testModal").style.display = "flex";
+        }
+
+        function closeTest() {
+            document.getElementById("testModal").style.display = "none";
+        }
+
+        function answer(choice) {
+
+            const message = document.getElementById("testMessage");
+
+            if (choice === "B") {
+
+                message.innerHTML =
+                    "✅ Correct! Your test is now in progress...";
+
+            } else {
+
+                message.innerHTML =
+                    "❌ Not quite! Keep going — this is only practice.";
+
+            }
+
+        }
+
+        window.onclick = function(event) {
+
+            const modal = document.getElementById("testModal");
+
+            if (event.target === modal) {
+                closeTest();
+            }
+
+        }
+
+    </script>
+
+</body>
+</html>

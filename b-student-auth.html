@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SkillStupor — Student</title>
+
+<style>
+
+:root{
+    --dark-purple:#48164E;
+    --logo-purple:#42144C;
+    --accent:#D875E7;
+    --accent-dark:#C45BD8;
+    --light-lavender:#F3DAFA;
+    --soft-lavender:#F7EAFA;
+    --cream:#FFF9EF;
+    --white:#FFFFFF;
+    --border:#EADCEC;
+    --secondary:#8B788F;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Segoe UI",Arial,sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:var(--cream);
+    color:var(--dark-purple);
+}
+
+
+/* =====================================================
+   PAGE LAYOUT
+===================================================== */
+
+.page{
+    min-height:100vh;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+}
+
+
+/* =====================================================
+   LEFT SIDE
+===================================================== */
+
+.left-panel{
+
+    background:
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(255,255,255,.20),
+            transparent 25%
+        ),
+
+        radial-gradient(
+            circle at 85% 80%,
+            rgba(255,255,255,.15),
+            transparent 25%
+        ),
+
+        linear-gradient(
+            145deg,
+            #48164E,
+            #D875E7
+        );
+
+    color:white;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:60px;
+
+}
+
+.left-content{
+    max-width:500px;
+}
+
+.logo{
+
+    font-size:32px;
+    font-weight:800;
+    margin-bottom:70px;
+
+}
+
+.logo span{
+    color:#FFF9EF;
+}
+
+.student-badge{
+
+    display:inline-block;
+
+    padding:8px 15px;
+
+    border-radius:30px;
+
+    background:rgba(255,255,255,.14);
+
+    border:1px solid rgba(255,255,255,.3);
+
+    font-size:13px;
+
+    font-weight:600;
+
+    margin-bottom:25px;
+
+}
+
+.left-content h1{
+
+    font-size:52px;
+
+    line-height:1.08;
+
+    letter-spacing:-1.5px;
+
+    margin-bottom:22px;
+
+}
+
+.left-content h1 span{
+    color:#FFF9EF;
+}
+
+.left-content > p{
+
+    font-size:17px;
+
+    line-height:1.7;
+
+    color:#FFF9EF;
+
+    margin-bottom:35px;
+
+}
+
+
+/* =====================================================
+   BENEFITS
+===================================================== */
+
+.benefits{
+    display:flex;
+    flex-direction:column;
+    gap:17px;
+}
+
+.benefit{
+
+    display:flex;
+    align-items:center;
+
+    gap:13px;
+
+    font-size:14px;
+
+}
+
+.benefit-icon{
+
+    width:38px;
+    height:38px;
+
+    border-radius:10px;
+
+    background:rgba(255,255,255,.16);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:18px;
+
+}
+
+
+/* =====================================================
+   RIGHT SIDE
+===================================================== */
+
+.right-panel{
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:40px 25px;
+
+}
+
+.auth-container{
+
+    width:100%;
+    max-width:450px;
+
+}
+
+
+/* =====================================================
+   MOBILE LOGO
+===================================================== */
+
+.mobile-logo{
+
+    display:none;
+
+    font-size:27px;
+
+    font-weight:800;
+
+    margin-bottom:30px;
+
+}
+
+.mobile-logo span{
+    color:var(--accent-dark);
+}
+
+
+/* =====================================================
+   AUTH HEADER
+===================================================== */
+
+.auth-header{
+
+    margin-bottom:25px;
+
+}
+
+.auth-header h2{
+
+    font-size:32px;
+
+    margin-bottom:8px;
+
+}
+
+.auth-header p{
+
+    color:var(--secondary);
+
+    font-size:14px;
+
+}
+
+
+/* =====================================================
+   TOGGLE
+===================================================== */
+
+.auth-toggle{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    background:var(--soft-lavender);
+
+    border-radius:12px;
+
+    padding:5px;
+
+    margin-bottom:25px;
+
+}
+
+.toggle-btn{
+
+    border:none;
+
+    background:transparent;
+
+    padding:11px;
+
+    border-radius:9px;
+
+    cursor:pointer;
+
+    font-weight:700;
+
+    color:var(--secondary);
+
+}
+
+.toggle-btn.active{
+
+    background:white;
+
+    color:var(--dark-purple);
+
+    box-shadow:
+        0 3px 10px
+        rgba(72,22,78,.08);
+
+}
+
+
+/* =====================================================
+   FORM
+===================================================== */
+
+.form{
+
+    display:none;
+
+}
+
+.form.active{
+    display:block;
+}
+
+.form-group{
+
+    margin-bottom:17px;
+
+}
+
+.form-group label{
+
+    display:block;
+
+    font-size:13px;
+
+    font-weight:700;
+
+    margin-bottom:7px;
+
+}
+
+.input-wrapper{
+    position:relative;
+}
+
+.form-group input{
+
+    width:100%;
+
+    padding:13px 14px;
+
+    border:1px solid var(--border);
+
+    border-radius:10px;
+
+    background:white;
+
+    color:var(--dark-purple);
+
+    font-size:14px;
+
+    outline:none;
+
+    transition:.2s;
+
+}
+
+.form-group input:focus{
+
+    border-color:var(--accent);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(216,117,231,.12);
+
+}
+
+.form-group input::placeholder{
+    color:#B5A6B8;
+}
+
+
+/* =====================================================
+   PASSWORD
+===================================================== */
+
+.password-toggle{
+
+    position:absolute;
+
+    right:12px;
+    top:50%;
+
+    transform:translateY(-50%);
+
+    border:none;
+
+    background:none;
+
+    cursor:pointer;
+
+    color:var(--secondary);
+
+    font-size:13px;
+
+}
+
+
+/* =====================================================
+   EXTRA OPTIONS
+===================================================== */
+
+.form-options{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin:5px 0 20px;
+
+    font-size:12px;
+
+}
+
+.remember{
+
+    display:flex;
+
+    gap:6px;
+
+    align-items:center;
+
+    color:var(--secondary);
+
+}
+
+.remember input{
+    accent-color:var(--accent-dark);
+}
+
+.forgot{
+
+    border:none;
+
+    background:none;
+
+    color:var(--accent-dark);
+
+    font-weight:700;
+
+    cursor:pointer;
+
+}
+
+
+/* =====================================================
+   MAIN BUTTON
+===================================================== */
+
+.submit-btn{
+
+    width:100%;
+
+    padding:14px;
+
+    border:none;
+
+    border-radius:11px;
+
+    background:var(--dark-purple);
+
+    color:white;
+
+    font-size:14px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+.submit-btn:hover{
+
+    background:var(--accent-dark);
+
+    transform:translateY(-1px);
+
+}
+
+
+/* =====================================================
+   DIVIDER
+===================================================== */
+
+.divider{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    margin:23px 0;
+
+    color:#A997AC;
+
+    font-size:12px;
+
+}
+
+.divider::before,
+.divider::after{
+
+    content:"";
+
+    height:1px;
+
+    flex:1;
+
+    background:var(--border);
+
+}
+
+
+/* =====================================================
+   GITHUB
+===================================================== */
+
+.github-btn{
+
+    width:100%;
+
+    padding:13px;
+
+    border:1px solid var(--border);
+
+    border-radius:11px;
+
+    background:white;
+
+    color:var(--dark-purple);
+
+    font-size:14px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:9px;
+
+}
+
+.github-btn:hover{
+
+    background:var(--soft-lavender);
+
+}
+
+
+/* =====================================================
+   TERMS
+===================================================== */
+
+.terms{
+
+    text-align:center;
+
+    margin-top:20px;
+
+    color:var(--secondary);
+
+    font-size:11px;
+
+    line-height:1.6;
+
+}
+
+.terms span{
+
+    color:var(--accent-dark);
+
+    font-weight:600;
+
+}
+
+
+/* =====================================================
+   STUDENT SIGNUP INFO
+===================================================== */
+
+.signup-note{
+
+    background:var(--soft-lavender);
+
+    border-radius:11px;
+
+    padding:11px 13px;
+
+    font-size:11px;
+
+    color:var(--secondary);
+
+    margin-bottom:18px;
+
+    line-height:1.5;
+
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:850px){
+
+    .page{
+        grid-template-columns:1fr;
+    }
+
+    .left-panel{
+        display:none;
+    }
+
+    .right-panel{
+        min-height:100vh;
+        padding:30px 20px;
+    }
+
+    .mobile-logo{
+        display:block;
+    }
+
+}
+
+@media(max-width:450px){
+
+    .auth-header h2{
+        font-size:27px;
+    }
+
+    .right-panel{
+        padding:25px 17px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="page">
+
+
+<!-- =====================================================
+     LEFT PANEL
+===================================================== -->
+
+<section class="left-panel">
+
+    <div class="left-content">
+
+
+        <div class="logo">
+            Skill<span>Stupor</span>
+        </div>
+
+
+        <div class="student-badge">
+            🎓 STUDENT SPACE
+        </div>
+
+
+        <h1>
+
+            Your skills.
+
+            <span>
+                Your future.
+            </span>
+
+        </h1>
+
+
+        <p>
+
+            Build your skills, discover your career path,
+            track your progress and connect with opportunities
+            designed around where you want to go.
+
+        </p>
+
+
+        <div class="benefits">
+
+
+            <div class="benefit">
+
+                <div class="benefit-icon">
+                    🧠
+                </div>
+
+                <span>
+                    Discover and develop the skills you need
+                </span>
+
+            </div>
+
+
+            <div class="benefit">
+
+                <div class="benefit-icon">
+                    🗺️
+                </div>
+
+                <span>
+                    Get a personalized career roadmap
+                </span>
+
+            </div>
+
+
+            <div class="benefit">
+
+                <div class="benefit-icon">
+                    🐙
+                </div>
+
+                <span>
+                    Showcase your projects and GitHub activity
+                </span>
+
+            </div>
+
+
+            <div class="benefit">
+
+                <div class="benefit-icon">
+                    🚀
+                </div>
+
+                <span>
+                    Find opportunities that match your skills
+                </span>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     RIGHT PANEL
+===================================================== -->
+
+<section class="right-panel">
+
+<div class="auth-container">
+
+
+    <div class="mobile-logo">
+        Skill<span>Stupor</span>
+    </div>
+
+
+    <div class="auth-header">
+
+        <h2 id="authTitle">
+            Welcome back 👋
+        </h2>
+
+        <p id="authSubtitle">
+            Log in to continue building your career.
+        </p>
+
+    </div>
+
+
+    <!-- =================================================
+         LOGIN / SIGNUP TOGGLE
+    ================================================= -->
+
+    <div class="auth-toggle">
+
+        <button
+            class="toggle-btn active"
+            id="loginToggle"
+            onclick="showLogin()">
+
+            Log In
+
+        </button>
+
+
+        <button
+            class="toggle-btn"
+            id="signupToggle"
+            onclick="showSignup()">
+
+            Sign Up
+
+        </button>
+
+    </div>
+
+
+
+    <!-- =================================================
+         LOGIN FORM
+    ================================================= -->
+
+    <form
+        class="form active"
+        id="loginForm"
+        onsubmit="loginStudent(event)">
+
+
+        <div class="form-group">
+
+            <label>
+                Email
+            </label>
+
+            <input
+                type="email"
+                placeholder="you@example.com"
+                required>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Password
+            </label>
+
+            <div class="input-wrapper">
+
+                <input
+                    type="password"
+                    id="loginPassword"
+                    placeholder="Enter your password"
+                    required>
+
+                <button
+                    type="button"
+                    class="password-toggle"
+                    onclick="togglePassword('loginPassword',this)">
+
+                    Show
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="form-options">
+
+            <label class="remember">
+
+                <input type="checkbox">
+
+                Remember me
+
+            </label>
+
+
+            <button
+                type="button"
+                class="forgot">
+
+                Forgot password?
+
+            </button>
+
+        </div>
+
+
+        <button
+            type="submit"
+            class="submit-btn" onclick = "window.location.href = 'd-student-dashboard.html'">
+
+            Log In →
+
+        </button>
+
+
+        <div class="divider">
+            OR
+        </div>
+
+
+        <button
+            type="button"
+            class="github-btn">
+
+            <span>🐙</span>
+
+            Continue with GitHub
+
+        </button>
+
+
+    </form>
+
+
+
+    <!-- =================================================
+         SIGNUP FORM
+    ================================================= -->
+
+    <form
+        class="form"
+        id="signupForm"
+        onsubmit="signupStudent(event)">
+
+
+        <div class="signup-note">
+
+            Create your student profile and start building
+            your personalized career journey.
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Full Name
+            </label>
+
+            <input
+                type="text"
+                placeholder="Your full name"
+                required>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Email
+            </label>
+
+            <input
+                type="email"
+                placeholder="you@example.com"
+                required>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Password
+            </label>
+
+            <div class="input-wrapper">
+
+                <input
+                    type="password"
+                    id="signupPassword"
+                    placeholder="Create a password"
+                    required
+                    minlength="8">
+
+                <button
+                    type="button"
+                    class="password-toggle"
+                    onclick="togglePassword('signupPassword',this)">
+
+                    Show
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Confirm Password
+            </label>
+
+            <input
+                type="password"
+                id="confirmPassword"
+                placeholder="Confirm your password"
+                required>
+
+        </div>
+
+
+        <button
+            type="submit"
+            class="submit-btn">
+
+            Create Student Account →
+
+        </button>
+
+
+        <div class="divider">
+            OR
+        </div>
+
+
+        <button
+            type="button"
+            class="github-btn">
+
+            <span>🐙</span>
+
+            Sign up with GitHub
+
+        </button>
+
+
+    </form>
+
+
+    <p class="terms">
+
+        By continuing, you agree to SkillStupor's
+        <span>Terms of Service</span>
+        and
+        <span>Privacy Policy</span>.
+
+    </p>
+
+
+</div>
+
+</section>
+
+</div>
+
+
+
+<script>
+
+
+/* =====================================================
+   SWITCH TO LOGIN
+===================================================== */
+
+function showLogin(){
+
+    document
+        .getElementById("loginForm")
+        .classList.add("active");
+
+    document
+        .getElementById("signupForm")
+        .classList.remove("active");
+
+
+    document
+        .getElementById("loginToggle")
+        .classList.add("active");
+
+    document
+        .getElementById("signupToggle")
+        .classList.remove("active");
+
+
+    document
+        .getElementById("authTitle")
+        .innerText =
+        "Welcome back 👋";
+
+
+    document
+        .getElementById("authSubtitle")
+        .innerText =
+        "Log in to continue building your career.";
+
+}
+
+
+/* =====================================================
+   SWITCH TO SIGNUP
+===================================================== */
+
+function showSignup(){
+
+    document
+        .getElementById("signupForm")
+        .classList.add("active");
+
+    document
+        .getElementById("loginForm")
+        .classList.remove("active");
+
+
+    document
+        .getElementById("signupToggle")
+        .classList.add("active");
+
+    document
+        .getElementById("loginToggle")
+        .classList.remove("active");
+
+
+    document
+        .getElementById("authTitle")
+        .innerText =
+        "Start your journey 🚀";
+
+
+    document
+        .getElementById("authSubtitle")
+        .innerText =
+        "Create your SkillStupor student account.";
+
+}
+
+
+/* =====================================================
+   PASSWORD VISIBILITY
+===================================================== */
+
+function togglePassword(id,button){
+
+    const input =
+        document.getElementById(id);
+
+
+    if(input.type === "password"){
+
+        input.type = "text";
+
+        button.innerText = "Hide";
+
+    }
+
+    else{
+
+        input.type = "password";
+
+        button.innerText = "Show";
+
+    }
+
+}
+
+
+/* =====================================================
+   LOGIN
+===================================================== */
+
+function loginStudent(event){
+
+    event.preventDefault();
+
+    /*
+        Backend authentication will go here later.
+    */
+
+    alert(
+        "Login button works! Connect this form to your authentication system."
+    );
+
+}
+
+
+/* =====================================================
+   SIGNUP
+===================================================== */
+
+function signupStudent(event){
+
+    event.preventDefault();
+
+
+    const password =
+        document.getElementById("signupPassword").value;
+
+
+    const confirmPassword =
+        document.getElementById("confirmPassword").value;
+
+
+    if(password !== confirmPassword){
+
+        alert(
+            "Passwords do not match."
+        );
+
+        return;
+
+    }
+
+
+    /*
+        Backend account creation will go here later.
+    */
+
+    alert(
+        "Student account form works! Connect this to your backend."
+    );
+
+}
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,2059 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SkillStupor - Delhi Branch Posts</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background: #f7f3f8;
+            color: #302333;
+        }
+
+
+        /* =====================================================
+           SIDEBAR
+        ===================================================== */
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+
+            width: 255px;
+            height: 100vh;
+
+            background: #48164E;
+            color: white;
+
+            padding: 28px 18px;
+
+            display: flex;
+            flex-direction: column;
+
+            z-index: 20;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+
+            padding: 0 12px;
+            margin-bottom: 30px;
+        }
+
+        .company-box {
+            background: rgba(255,255,255,0.09);
+
+            border-radius: 15px;
+
+            padding: 16px;
+
+            margin-bottom: 20px;
+        }
+
+        .company-name {
+            font-size: 16px;
+            font-weight: 700;
+
+            margin-bottom: 5px;
+        }
+
+        .branch-name {
+            font-size: 12px;
+
+            color: #e5c6e9;
+
+            margin-bottom: 7px;
+        }
+
+        .company-type {
+            font-size: 10px;
+
+            color: #dfc3e3;
+
+            letter-spacing: 1.3px;
+        }
+
+
+        /* PARENT CONNECTION */
+
+        .parent-connection {
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            background: rgba(216,117,231,0.13);
+
+            border: 1px solid rgba(216,117,231,0.25);
+
+            border-radius: 10px;
+
+            padding: 10px 11px;
+
+            margin-bottom: 24px;
+
+            font-size: 11px;
+
+            color: #ead8ed;
+        }
+
+        .connection-dot {
+            width: 8px;
+            height: 8px;
+
+            background: #d875e7;
+
+            border-radius: 50%;
+        }
+
+
+        .nav-title {
+            font-size: 10px;
+
+            color: #caa6cf;
+
+            margin: 8px 12px 10px;
+
+            letter-spacing: 1.2px;
+
+            text-transform: uppercase;
+        }
+
+
+        .nav-btn {
+            width: 100%;
+
+            border: none;
+
+            background: transparent;
+
+            color: #ead9ed;
+
+            padding: 14px;
+
+            border-radius: 10px;
+
+            text-align: left;
+
+            font-size: 14px;
+
+            cursor: pointer;
+
+            margin-bottom: 5px;
+
+            transition: 0.2s;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255,255,255,0.09);
+
+            color: white;
+        }
+
+        .nav-btn.active {
+            background: #D875E7;
+
+            color: #48164E;
+
+            font-weight: 700;
+        }
+
+
+        .sidebar-bottom {
+            margin-top: auto;
+        }
+
+
+        .profile-mini {
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            padding: 12px;
+
+            background: rgba(255,255,255,0.07);
+
+            border-radius: 12px;
+        }
+
+        .profile-icon {
+            width: 37px;
+            height: 37px;
+
+            border-radius: 50%;
+
+            background: #D875E7;
+
+            color: #48164E;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 12px;
+
+            font-weight: 800;
+        }
+
+        .profile-text strong {
+            display: block;
+
+            font-size: 13px;
+        }
+
+        .profile-text span {
+            font-size: 11px;
+
+            color: #cdb4d1;
+        }
+
+
+        /* =====================================================
+           MAIN
+        ===================================================== */
+
+        .main {
+            margin-left: 255px;
+
+            min-height: 100vh;
+        }
+
+
+        /* =====================================================
+           TOP BAR
+        ===================================================== */
+
+        .topbar {
+            height: 78px;
+
+            background: white;
+
+            border-bottom: 1px solid #eadcec;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 0 45px;
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 10;
+        }
+
+        .page-title h1 {
+            font-size: 23px;
+
+            color: #48164E;
+        }
+
+        .page-title p {
+            font-size: 12px;
+
+            color: #8B788F;
+
+            margin-top: 4px;
+        }
+
+        .branch-badge {
+            background: #F3DAFA;
+
+            color: #48164E;
+
+            padding: 9px 15px;
+
+            border-radius: 20px;
+
+            font-size: 11px;
+
+            font-weight: 700;
+        }
+
+
+        /* =====================================================
+           CONTENT
+        ===================================================== */
+
+        .content {
+            width: 100%;
+
+            max-width: 1250px;
+
+            margin: auto;
+
+            padding: 35px 45px 70px;
+
+            display: grid;
+
+            grid-template-columns: minmax(600px, 780px) 280px;
+
+            gap: 30px;
+
+            justify-content: center;
+        }
+
+
+        /* =====================================================
+           SHARE UPDATE
+        ===================================================== */
+
+        .create-post {
+            background: white;
+
+            border: 1px solid #eadcec;
+
+            border-radius: 18px;
+
+            padding: 20px;
+
+            margin-bottom: 28px;
+
+            box-shadow: 0 3px 15px rgba(72,22,78,0.03);
+        }
+
+        .create-top {
+            display: flex;
+
+            align-items: center;
+
+            gap: 14px;
+        }
+
+        .company-avatar {
+            width: 48px;
+            height: 48px;
+
+            border-radius: 12px;
+
+            background: #48164E;
+
+            color: white;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-weight: 800;
+        }
+
+        .update-input {
+            flex: 1;
+
+            border: 1px solid #dfd2e1;
+
+            background: #fbf8fc;
+
+            border-radius: 30px;
+
+            padding: 14px 19px;
+
+            color: #8B788F;
+
+            font-size: 14px;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .update-input:hover {
+            background: #f7edf9;
+
+            border-color: #d8b9de;
+        }
+
+        .create-actions {
+            display: flex;
+
+            gap: 10px;
+
+            margin-top: 17px;
+
+            padding-top: 15px;
+
+            border-top: 1px solid #eee5ef;
+        }
+
+        .create-action {
+            flex: 1;
+
+            border: none;
+
+            background: transparent;
+
+            padding: 11px;
+
+            border-radius: 10px;
+
+            color: #604965;
+
+            font-weight: 600;
+
+            cursor: pointer;
+        }
+
+        .create-action:hover {
+            background: #f7edf9;
+
+            color: #48164E;
+        }
+
+
+        /* =====================================================
+           POST
+        ===================================================== */
+
+        .post {
+            background: white;
+
+            border: 1px solid #eadcec;
+
+            border-radius: 18px;
+
+            margin-bottom: 30px;
+
+            overflow: hidden;
+
+            box-shadow: 0 4px 18px rgba(72,22,78,0.035);
+        }
+
+        .post-header {
+            display: flex;
+
+            align-items: center;
+
+            gap: 13px;
+
+            padding: 22px 24px 14px;
+        }
+
+        .post-avatar {
+            width: 50px;
+            height: 50px;
+
+            border-radius: 13px;
+
+            background: #48164E;
+
+            color: white;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 16px;
+
+            font-weight: 800;
+        }
+
+        .post-author {
+            flex: 1;
+        }
+
+        .post-author strong {
+            display: block;
+
+            font-size: 15px;
+
+            color: #321d35;
+        }
+
+        .post-author span {
+            display: block;
+
+            margin-top: 4px;
+
+            font-size: 11px;
+
+            color: #8B788F;
+        }
+
+        .post-menu {
+            border: none;
+
+            background: transparent;
+
+            font-size: 22px;
+
+            color: #8B788F;
+
+            cursor: pointer;
+        }
+
+
+        .post-content {
+            padding: 5px 24px 22px;
+        }
+
+        .post-content p {
+            font-size: 15px;
+
+            line-height: 1.7;
+
+            color: #443647;
+        }
+
+
+        /* =====================================================
+           LARGE PHOTOS
+        ===================================================== */
+
+        .post-photo {
+            width: 100%;
+
+            height: 390px;
+
+            overflow: hidden;
+
+            background: #eee;
+        }
+
+        .post-photo img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            display: block;
+
+            transition: transform 0.3s;
+        }
+
+        .post-photo img:hover {
+            transform: scale(1.02);
+        }
+
+
+        /* =====================================================
+           POST STATS
+        ===================================================== */
+
+        .post-stats {
+            display: flex;
+
+            justify-content: space-between;
+
+            padding: 13px 24px;
+
+            color: #8B788F;
+
+            font-size: 12px;
+
+            border-bottom: 1px solid #eee5ef;
+        }
+
+
+        /* =====================================================
+           BIG ACTION BUTTONS
+        ===================================================== */
+
+        .post-actions {
+            display: flex;
+
+            gap: 8px;
+
+            padding: 12px 15px;
+        }
+
+        .post-action {
+            flex: 1;
+
+            border: none;
+
+            background: transparent;
+
+            color: #604965;
+
+            padding: 14px 10px;
+
+            border-radius: 11px;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .post-action:hover {
+            background: #f6ecf8;
+
+            color: #48164E;
+        }
+
+        .post-action.liked {
+            background: #faeafa;
+
+            color: #c45bd8;
+        }
+
+
+        /* =====================================================
+           RIGHT PANEL
+        ===================================================== */
+
+        .right-panel {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 20px;
+        }
+
+        .side-card {
+            background: white;
+
+            border: 1px solid #eadcec;
+
+            border-radius: 17px;
+
+            padding: 21px;
+        }
+
+        .side-card h3 {
+            color: #48164E;
+
+            font-size: 15px;
+
+            margin-bottom: 15px;
+        }
+
+
+        /* PARENT CONNECTION CARD */
+
+        .parent-card {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            padding: 13px;
+
+            background: #faf5fb;
+
+            border-radius: 12px;
+
+            border: 1px solid #eee1f0;
+        }
+
+        .parent-icon {
+            width: 38px;
+            height: 38px;
+
+            border-radius: 10px;
+
+            background: #48164E;
+
+            color: white;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 12px;
+
+            font-weight: 800;
+        }
+
+        .parent-text strong {
+            display: block;
+
+            font-size: 12px;
+
+            color: #3c2940;
+        }
+
+        .parent-text span {
+            font-size: 10px;
+
+            color: #8B788F;
+        }
+
+
+        .visibility-item {
+            display: flex;
+
+            align-items: center;
+
+            gap: 11px;
+
+            padding: 12px 0;
+
+            border-bottom: 1px solid #f0e8f1;
+        }
+
+        .visibility-item:last-child {
+            border-bottom: none;
+        }
+
+        .visibility-icon {
+            width: 36px;
+            height: 36px;
+
+            border-radius: 9px;
+
+            background: #F3DAFA;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+        }
+
+        .visibility-text strong {
+            display: block;
+
+            font-size: 12px;
+
+            color: #3c2940;
+        }
+
+        .visibility-text span {
+            font-size: 10px;
+
+            color: #8B788F;
+        }
+
+
+        .tip {
+            background: #48164E;
+
+            color: white;
+
+            border-radius: 17px;
+
+            padding: 22px;
+        }
+
+        .tip h3 {
+            font-size: 15px;
+
+            margin-bottom: 9px;
+        }
+
+        .tip p {
+            color: #e7cfea;
+
+            font-size: 12px;
+
+            line-height: 1.65;
+        }
+
+
+        /* =====================================================
+           MODAL
+        ===================================================== */
+
+        .modal-overlay {
+            position: fixed;
+
+            inset: 0;
+
+            background: rgba(30,10,32,0.55);
+
+            display: none;
+
+            align-items: center;
+            justify-content: center;
+
+            z-index: 100;
+        }
+
+        .modal {
+            width: min(560px, 92%);
+
+            background: white;
+
+            border-radius: 20px;
+
+            padding: 26px;
+
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        }
+
+        .modal-header {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 20px;
+        }
+
+        .modal-header h2 {
+            color: #48164E;
+
+            font-size: 20px;
+        }
+
+        .close-modal {
+            width: 34px;
+            height: 34px;
+
+            border: none;
+
+            border-radius: 50%;
+
+            background: #f3eaf5;
+
+            color: #48164E;
+
+            font-size: 20px;
+
+            cursor: pointer;
+        }
+
+        .post-textarea {
+            width: 100%;
+
+            min-height: 170px;
+
+            resize: vertical;
+
+            border: 1px solid #dfd0e1;
+
+            border-radius: 13px;
+
+            padding: 15px;
+
+            font-size: 14px;
+
+            outline: none;
+        }
+
+        .post-textarea:focus {
+            border-color: #c45bd8;
+        }
+
+        .modal-row {
+            margin-top: 17px;
+        }
+
+        .modal-row label {
+            display: block;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            color: #59415e;
+
+            margin-bottom: 7px;
+        }
+
+        .modal-row select {
+            width: 100%;
+
+            padding: 12px;
+
+            border-radius: 10px;
+
+            border: 1px solid #dfd0e1;
+
+            background: white;
+        }
+
+        .publish-btn {
+            width: 100%;
+
+            margin-top: 20px;
+
+            padding: 14px;
+
+            border: none;
+
+            border-radius: 11px;
+
+            background: #48164E;
+
+            color: white;
+
+            font-weight: 700;
+
+            font-size: 14px;
+
+            cursor: pointer;
+        }
+
+        .publish-btn:hover {
+            background: #602168;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 1050px) {
+
+            .content {
+                grid-template-columns: minmax(500px, 750px);
+            }
+
+            .right-panel {
+                display: none;
+            }
+
+        }
+
+
+        @media (max-width: 750px) {
+
+            .sidebar {
+                position: relative;
+
+                width: 100%;
+
+                height: auto;
+
+                padding: 20px;
+            }
+
+            .sidebar-bottom {
+                display: none;
+            }
+
+            .main {
+                margin-left: 0;
+            }
+
+            .topbar {
+                padding: 0 20px;
+            }
+
+            .content {
+                display: block;
+
+                padding: 20px;
+            }
+
+            .post-photo {
+                height: 280px;
+            }
+
+            .create-actions {
+                flex-direction: column;
+            }
+
+            .post-actions {
+                flex-direction: column;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<aside class="sidebar">
+
+
+    <div class="logo">
+        SkillStupor
+    </div>
+
+
+    <div class="company-box">
+
+        <div class="company-name">
+            TechNova Pvt. Ltd.
+        </div>
+
+        <div class="branch-name">
+            Delhi Branch
+        </div>
+
+        <div class="company-type">
+            CHILD BRANCH
+        </div>
+
+    </div>
+
+
+    <div class="parent-connection">
+
+        <div class="connection-dot"></div>
+
+        <span>
+            Connected to Parent / HQ
+        </span>
+
+    </div>
+
+
+    <div class="nav-title">
+        Branch
+    </div>
+
+
+    <button class="nav-btn">
+        📊 Overview
+    </button>
+
+
+    <!-- POST DIRECTLY BELOW OVERVIEW -->
+
+    <button class="nav-btn active">
+        📝 Post
+    </button>
+
+
+    <button class="nav-btn">
+        💼 Branch Jobs
+    </button>
+
+
+    <button class="nav-btn">
+        👥 Candidates
+    </button>
+
+
+    <button class="nav-btn">
+        🧑‍💼 Employees
+    </button>
+
+
+    <button class="nav-btn">
+        📩 Requests to Parent
+    </button>
+
+
+    <button class="nav-btn">
+        ⚙️ Branch Settings
+    </button>
+
+
+    <div class="sidebar-bottom">
+
+        <div class="profile-mini">
+
+            <div class="profile-icon">
+                DL
+            </div>
+
+
+            <div class="profile-text">
+
+                <strong>
+                    Delhi Branch Admin
+                </strong>
+
+                <span>
+                    Child Branch
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</aside>
+
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="main">
+
+
+    <!-- TOP BAR -->
+
+    <header class="topbar">
+
+        <div class="page-title">
+
+            <h1>
+                Branch Posts
+            </h1>
+
+            <p>
+                Share what's happening at TechNova Delhi
+            </p>
+
+        </div>
+
+
+        <div class="branch-badge">
+            🏬 DELHI BRANCH
+        </div>
+
+    </header>
+
+
+
+    <div class="content">
+
+
+        <!-- =================================================
+             FEED
+        ================================================= -->
+
+        <section>
+
+
+            <!-- SHARE UPDATE -->
+
+            <div class="create-post">
+
+                <div class="create-top">
+
+                    <div class="company-avatar">
+                        DL
+                    </div>
+
+
+                    <div
+                        class="update-input"
+                        onclick="openPostModal()"
+                    >
+                        Share an update...
+                    </div>
+
+                </div>
+
+
+                <div class="create-actions">
+
+                    <button
+                        class="create-action"
+                        onclick="openPostModal()"
+                    >
+                        📷 Photo
+                    </button>
+
+
+                    <button
+                        class="create-action"
+                        onclick="openPostModal()"
+                    >
+                        🎉 Event
+                    </button>
+
+
+                    <button
+                        class="create-action"
+                        onclick="openPostModal()"
+                    >
+                        📢 Announcement
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 POST 1 — BRANCH EVENT
+            ================================================= -->
+
+            <article class="post">
+
+
+                <div class="post-header">
+
+                    <div class="post-avatar">
+                        DL
+                    </div>
+
+
+                    <div class="post-author">
+
+                        <strong>
+                            TechNova Pvt. Ltd. · Delhi Branch
+                        </strong>
+
+                        <span>
+                            Delhi Branch · 2h ago
+                        </span>
+
+                    </div>
+
+
+                    <button class="post-menu">
+                        ⋯
+                    </button>
+
+                </div>
+
+
+                <div class="post-content">
+
+                    <p>
+                        What a day! 🚀
+                        <br><br>
+
+                        Our Delhi team had an amazing time at the
+                        TechNova Innovation Meet, where employees
+                        came together to showcase ideas, experiments
+                        and some seriously creative projects.
+
+                        Huge thanks to everyone who made the event
+                        such a memorable one!
+                    </p>
+
+                </div>
+
+
+                <div class="post-photo">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1400&q=85"
+                        alt="Technology event"
+                    >
+
+                </div>
+
+
+                <div class="post-stats">
+
+                    <span>
+                        ♥ 126 reactions
+                    </span>
+
+                    <span>
+                        18 comments
+                    </span>
+
+                </div>
+
+
+                <div class="post-actions">
+
+                    <button
+                        class="post-action"
+                        onclick="toggleLike(this)"
+                    >
+                        ♡ Like
+                    </button>
+
+
+                    <button
+                        class="post-action"
+                        onclick="commentPost()"
+                    >
+                        💬 Comment
+                    </button>
+
+
+                    <button
+                        class="post-action"
+                        onclick="sharePost()"
+                    >
+                        ↗ Share
+                    </button>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 POST 2 — TEAM ACHIEVEMENT
+            ================================================= -->
+
+            <article class="post">
+
+
+                <div class="post-header">
+
+                    <div class="post-avatar">
+                        DL
+                    </div>
+
+
+                    <div class="post-author">
+
+                        <strong>
+                            TechNova Pvt. Ltd. · Delhi Branch
+                        </strong>
+
+                        <span>
+                            Delhi Branch · Yesterday
+                        </span>
+
+                    </div>
+
+
+                    <button class="post-menu">
+                        ⋯
+                    </button>
+
+                </div>
+
+
+                <div class="post-content">
+
+                    <p>
+                        A massive congratulations to our Delhi team
+                        for an incredible achievement! 🏆
+                        <br><br>
+
+                        Months of collaboration, experimentation and
+                        hard work came together to make this possible.
+
+                        Proud of every person who contributed.
+                        Here's to the next milestone!
+                    </p>
+
+                </div>
+
+
+                <div class="post-photo">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1400&q=85"
+                        alt="Team celebration"
+                    >
+
+                </div>
+
+
+                <div class="post-stats">
+
+                    <span>
+                        ♥ 204 reactions
+                    </span>
+
+                    <span>
+                        29 comments
+                    </span>
+
+                </div>
+
+
+                <div class="post-actions">
+
+                    <button
+                        class="post-action"
+                        onclick="toggleLike(this)"
+                    >
+                        ♡ Like
+                    </button>
+
+
+                    <button
+                        class="post-action"
+                        onclick="commentPost()"
+                    >
+                        💬 Comment
+                    </button>
+
+
+                    <button
+                        class="post-action"
+                        onclick="sharePost()"
+                    >
+                        ↗ Share
+                    </button>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 POST 3 — TEAM CULTURE
+            ================================================= -->
+
+            <article class="post">
+
+
+                <div class="post-header">
+
+                    <div class="post-avatar">
+                        DL
+                    </div>
+
+
+                    <div class="post-author">
+
+                        <strong>
+                            TechNova Pvt. Ltd. · Delhi Branch
+                        </strong>
+
+                        <span>
+                            Delhi Branch · 3 days ago
+                        </span>
+
+                    </div>
+
+
+                    <button class="post-menu">
+                        ⋯
+                    </button>
+
+                </div>
+
+
+                <div class="post-content">
+
+                    <p>
+                        The best teams aren't built only in meetings. 💜
+                        <br><br>
+
+                        Our Delhi branch spent the weekend together
+                        for a team wellness and sports day.
+
+                        Plenty of competition, even more laughter,
+                        and a lot of memories made along the way!
+                    </p>
+
+                </div>
+
+
+                <div class="post-photo">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1400&q=85"
+                        alt="Team gathering"
+                    >
+
+                </div>
+
+
+                <div class="post-stats">
+
+                    <span>
+                        ♥ 178 reactions
+                    </span>
+
+                    <span>
+                        25 comments
+                    </span>
+
+                </div>
+
+
+                <div class="post-actions">
+
+                    <button
+                        class="post-action"
+                        onclick="toggleLike(this)"
+                    >
+                        ♡ Like
+                    </button>
+
+
+                    <button
+                        class="post-action"
+                        onclick="commentPost()"
+                    >
+                        💬 Comment
+                    </button>
+
+
+                    <button
+                        class="post-action"
+                        onclick="sharePost()"
+                    >
+                        ↗ Share
+                    </button>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 POST 4 — WORKSHOP
+            ================================================= -->
+
+            <article class="post">
+
+
+                <div class="post-header">
+
+                    <div class="post-avatar">
+                        DL
+                    </div>
+
+
+                    <div class="post-author">
+
+                        <strong>
+                            TechNova Pvt. Ltd. · Delhi Branch
+                        </strong>
+
+                        <span>
+                            Delhi Branch · 5 days ago
+                        </span>
+
+                    </div>
+
+
+                    <button class="post-menu">
+                        ⋯
+                    </button>
+
+                </div>
+
+
+                <div class="post-content">
+
+                    <p>
+                        Learning never stops. 💡
+                        <br><br>
+
+                        Our Delhi team recently hosted an interactive
+                        workshop on emerging technologies.
+
+                        It was great to see people from different
+                        teams exchanging ideas and learning from
+                        one another.
+                    </p>
+
+                </div>
+
+
+                <div class="post-photo">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1400&q=85"
+                        alt="Technology workshop"
+                    >
+
+                </div>
+
+
+                <div class="post-stats">
+
+                    <span>
+                        ♥ 143 reactions
+                    </span>
+
+                    <span>
+                        16 comments
+                    </span>
+
+                </div>
+
+
+                <div class="post-actions">
+
+                    <button
+                        class="post-action"
+                        onclick="toggleLike(this)"
+                    >
+                        ♡ Like
+                    </button>
+
+
+                    <button
+                        class="post-action"
+                        onclick="commentPost()"
+                    >
+                        💬 Comment
+                    </button>
+
+
+                    <button
+                        class="post-action"
+                        onclick="sharePost()"
+                    >
+                        ↗ Share
+                    </button>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 POST 5 — WELCOME
+            ================================================= -->
+
+            <article class="post">
+
+
+                <div class="post-header">
+
+                    <div class="post-avatar">
+                        DL
+                    </div>
+
+
+                    <div class="post-author">
+
+                        <strong>
+                            TechNova Pvt. Ltd. · Delhi Branch
+                        </strong>
+
+                        <span>
+                            Delhi Branch · 1 week ago
+                        </span>
+
+                    </div>
+
+
+                    <button class="post-menu">
+                        ⋯
+                    </button>
+
+                </div>
+
+
+                <div class="post-content">
+
+                    <p>
+                        Welcome to the newest members of our Delhi
+                        branch! 👋
+                        <br><br>
+
+                        We're incredibly excited to have you join the
+                        team.
+
+                        Here's to new ideas, new friendships and
+                        plenty of things to build together. 💜
+                    </p>
+
+                </div>
+
+
+                <div class="post-photo">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1400&q=85"
+                        alt="Team collaboration"
+                    >
+
+                </div>
+
+
+                <div class="post-stats">
+
+                    <span>
+                        ♥ 167 reactions
+                    </span>
+
+                    <span>
+                        23 comments
+                    </span>
+
+                </div>
+
+
+                <div class="post-actions">
+
+                    <button
+                        class="post-action"
+                        onclick="toggleLike(this)"
+                    >
+                        ♡ Like
+                    </button>
+
+
+                    <button
+                        class="post-action"
+                        onclick="commentPost()"
+                    >
+                        💬 Comment
+                    </button>
+
+
+                    <button
+                        class="post-action"
+                        onclick="sharePost()"
+                    >
+                        ↗ Share
+                    </button>
+
+                </div>
+
+            </article>
+
+        </section>
+
+
+
+        <!-- =================================================
+             RIGHT PANEL
+        ================================================= -->
+
+        <aside class="right-panel">
+
+
+            <!-- PARENT CONNECTION -->
+
+            <div class="side-card">
+
+                <h3>
+                    Parent / HQ
+                </h3>
+
+
+                <div class="parent-card">
+
+                    <div class="parent-icon">
+                        TN
+                    </div>
+
+
+                    <div class="parent-text">
+
+                        <strong>
+                            TechNova Pvt. Ltd.
+                        </strong>
+
+                        <span>
+                            Parent / HQ · Connected
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- POST VISIBILITY -->
+
+            <div class="side-card">
+
+                <h3>
+                    Who can see your posts?
+                </h3>
+
+
+                <div class="visibility-item">
+
+                    <div class="visibility-icon">
+                        🏢
+                    </div>
+
+
+                    <div class="visibility-text">
+
+                        <strong>
+                            Delhi Branch
+                        </strong>
+
+                        <span>
+                            Everyone in this branch
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="visibility-item">
+
+                    <div class="visibility-icon">
+                        🌐
+                    </div>
+
+
+                    <div class="visibility-text">
+
+                        <strong>
+                            Parent / HQ
+                        </strong>
+
+                        <span>
+                            TechNova headquarters
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="visibility-item">
+
+                    <div class="visibility-icon">
+                        🎯
+                    </div>
+
+
+                    <div class="visibility-text">
+
+                        <strong>
+                            Other Branches
+                        </strong>
+
+                        <span>
+                            Share with selected branches
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- TIP -->
+
+            <div class="tip">
+
+                <h3>
+                    💡 Represent your branch
+                </h3>
+
+
+                <p>
+                    Share local events, team moments, achievements,
+                    workshops, celebrations and everything that
+                    makes the Delhi branch unique.
+                </p>
+
+            </div>
+
+
+        </aside>
+
+    </div>
+
+</main>
+
+
+
+<!-- =====================================================
+     POST MODAL
+===================================================== -->
+
+<div
+    class="modal-overlay"
+    id="postModal"
+>
+
+
+    <div class="modal">
+
+
+        <div class="modal-header">
+
+            <h2>
+                Share an update
+            </h2>
+
+
+            <button
+                class="close-modal"
+                onclick="closePostModal()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <textarea
+            class="post-textarea"
+            id="postText"
+            placeholder="What would you like to share?"
+        ></textarea>
+
+
+        <div class="modal-row">
+
+            <label>
+                Who can see this post?
+            </label>
+
+
+            <select id="visibility">
+
+                <option>
+                    Delhi Branch
+                </option>
+
+                <option>
+                    Delhi Branch + Parent / HQ
+                </option>
+
+                <option>
+                    Selected Branches
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <button
+            class="publish-btn"
+            onclick="publishPost()"
+        >
+            Publish Post
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+
+    /* =====================================================
+       OPEN MODAL
+    ===================================================== */
+
+    function openPostModal() {
+
+        document.getElementById("postModal").style.display = "flex";
+
+    }
+
+
+    /* =====================================================
+       CLOSE MODAL
+    ===================================================== */
+
+    function closePostModal() {
+
+        document.getElementById("postModal").style.display = "none";
+
+    }
+
+
+    /* =====================================================
+       PUBLISH
+    ===================================================== */
+
+    function publishPost() {
+
+        const text =
+            document.getElementById("postText").value.trim();
+
+
+        if (text === "") {
+
+            alert(
+                "Please write something before publishing."
+            );
+
+            return;
+
+        }
+
+
+        alert(
+            "Post published successfully!"
+        );
+
+
+        document.getElementById("postText").value = "";
+
+        closePostModal();
+
+    }
+
+
+    /* =====================================================
+       LIKE
+    ===================================================== */
+
+    function toggleLike(button) {
+
+        button.classList.toggle("liked");
+
+
+        if (button.classList.contains("liked")) {
+
+            button.innerHTML = "♥ Liked";
+
+        } else {
+
+            button.innerHTML = "♡ Like";
+
+        }
+
+    }
+
+
+    /* =====================================================
+       COMMENT
+    ===================================================== */
+
+    function commentPost() {
+
+        alert(
+            "Comment section coming soon!"
+        );
+
+    }
+
+
+    /* =====================================================
+       SHARE
+    ===================================================== */
+
+    function sharePost() {
+
+        alert(
+            "Share functionality coming soon!"
+        );
+
+    }
+
+
+    /* =====================================================
+       CLOSE MODAL OUTSIDE CLICK
+    ===================================================== */
+
+    window.onclick = function(event) {
+
+        const modal =
+            document.getElementById("postModal");
+
+
+        if (event.target === modal) {
+
+            closePostModal();
+
+        }
+
+    };
+
+</script>
+
+
+</body>
+</html>

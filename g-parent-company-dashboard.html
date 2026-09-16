@@ -1,0 +1,1508 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SkillStupor - Parent Company</title>
+
+    <style>
+
+        :root {
+            --purple: #48164E;
+            --purple-dark: #35113A;
+            --accent: #D875E7;
+            --accent-dark: #C45BD8;
+
+            --cream: #FFF9EF;
+            --lavender: #F7EAFA;
+            --light-purple: #F3DAFA;
+
+            --white: #FFFFFF;
+            --text: #35143D;
+            --muted: #8B788F;
+
+            --green: #6FA77A;
+            --orange: #E7A85C;
+            --red: #D86C6C;
+
+            --border: #EADCEC;
+        }
+
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+
+        body {
+            background: var(--cream);
+            color: var(--text);
+        }
+
+
+        /* ================= SIDEBAR ================= */
+
+        .sidebar {
+
+            position: fixed;
+            left: 0;
+            top: 0;
+
+            width: 250px;
+            height: 100vh;
+
+            background: var(--purple);
+
+            padding: 28px 18px;
+
+            color: white;
+        }
+
+
+        .logo {
+
+            font-size: 25px;
+            font-weight: 800;
+
+            padding: 0 12px 35px;
+        }
+
+
+        .logo span {
+            color: var(--accent);
+        }
+
+
+        .company-mini {
+
+            background: rgba(255,255,255,0.08);
+
+            border: 1px solid rgba(255,255,255,0.12);
+
+            padding: 15px;
+
+            border-radius: 13px;
+
+            margin-bottom: 28px;
+        }
+
+
+        .company-mini small {
+
+            color: #D8C5DB;
+
+            font-size: 11px;
+        }
+
+
+        .company-mini strong {
+
+            display: block;
+
+            margin-top: 5px;
+
+            font-size: 14px;
+        }
+
+
+        .company-mini .type {
+
+            display: inline-block;
+
+            margin-top: 9px;
+
+            padding: 4px 8px;
+
+            border-radius: 20px;
+
+            background: rgba(216,117,231,0.18);
+
+            color: var(--accent);
+
+            font-size: 10px;
+
+            font-weight: bold;
+        }
+
+
+        .nav-title {
+
+            color: #BDA9C1;
+
+            font-size: 10px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+
+            padding: 0 12px 10px;
+        }
+
+
+        .nav-item {
+
+            width: 100%;
+
+            border: none;
+
+            background: transparent;
+
+            color: #E6D9E8;
+
+            text-align: left;
+
+            padding: 13px 12px;
+
+            border-radius: 9px;
+
+            margin-bottom: 4px;
+
+            cursor: pointer;
+
+            font-size: 13px;
+
+            transition: 0.2s;
+        }
+
+
+        .nav-item:hover,
+        .nav-item.active {
+
+            background: rgba(255,255,255,0.10);
+
+            color: white;
+        }
+
+
+        .nav-item.active {
+
+            border-left: 3px solid var(--accent);
+        }
+
+
+        .bottom-nav {
+
+            position: absolute;
+
+            bottom: 25px;
+
+            left: 18px;
+
+            right: 18px;
+        }
+
+
+        /* ================= MAIN ================= */
+
+        .main {
+
+            margin-left: 250px;
+
+            min-height: 100vh;
+
+            padding: 35px 42px;
+        }
+
+
+        .topbar {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 35px;
+        }
+
+
+        .welcome h1 {
+
+            font-size: 29px;
+
+            margin-bottom: 6px;
+        }
+
+
+        .welcome p {
+
+            color: var(--muted);
+
+            font-size: 14px;
+        }
+
+
+        .profile {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+        }
+
+
+        .profile-avatar {
+
+            width: 43px;
+
+            height: 43px;
+
+            border-radius: 50%;
+
+            background: var(--light-purple);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-weight: bold;
+
+            color: var(--purple);
+        }
+
+
+        .profile-info strong {
+
+            display: block;
+
+            font-size: 13px;
+        }
+
+
+        .profile-info small {
+
+            color: var(--muted);
+
+            font-size: 11px;
+        }
+
+
+        /* ================= STATS ================= */
+
+        .stats {
+
+            display: grid;
+
+            grid-template-columns: repeat(4, 1fr);
+
+            gap: 18px;
+
+            margin-bottom: 28px;
+        }
+
+
+        .stat-card {
+
+            background: white;
+
+            border: 1px solid var(--border);
+
+            border-radius: 15px;
+
+            padding: 21px;
+
+            box-shadow: 0 4px 15px rgba(72,22,78,0.04);
+        }
+
+
+        .stat-top {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            margin-bottom: 15px;
+        }
+
+
+        .stat-icon {
+
+            width: 37px;
+
+            height: 37px;
+
+            border-radius: 9px;
+
+            background: var(--light-purple);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+        }
+
+
+        .stat-card small {
+
+            color: var(--muted);
+
+            font-size: 12px;
+        }
+
+
+        .stat-card h2 {
+
+            font-size: 27px;
+
+            margin-bottom: 5px;
+        }
+
+
+        .growth {
+
+            color: var(--green);
+
+            font-size: 11px;
+
+            font-weight: bold;
+        }
+
+
+        /* ================= GRID ================= */
+
+        .dashboard-grid {
+
+            display: grid;
+
+            grid-template-columns: 1.5fr 1fr;
+
+            gap: 22px;
+
+            margin-bottom: 25px;
+        }
+
+
+        .card {
+
+            background: white;
+
+            border: 1px solid var(--border);
+
+            border-radius: 17px;
+
+            padding: 23px;
+        }
+
+
+        .card-header {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 22px;
+        }
+
+
+        .card-header h3 {
+
+            font-size: 17px;
+        }
+
+
+        .view-button {
+
+            border: none;
+
+            background: none;
+
+            color: var(--accent-dark);
+
+            font-size: 12px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+
+        /* ================= BRANCHES ================= */
+
+        .branch {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 14px;
+
+            padding: 13px 0;
+
+            border-bottom: 1px solid var(--border);
+        }
+
+
+        .branch:last-child {
+            border-bottom: none;
+        }
+
+
+        .branch-icon {
+
+            width: 42px;
+
+            height: 42px;
+
+            border-radius: 10px;
+
+            background: var(--lavender);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 20px;
+        }
+
+
+        .branch-info {
+
+            flex: 1;
+        }
+
+
+        .branch-info strong {
+
+            display: block;
+
+            font-size: 13px;
+
+            margin-bottom: 4px;
+        }
+
+
+        .branch-info small {
+
+            color: var(--muted);
+
+            font-size: 11px;
+        }
+
+
+        .branch-status {
+
+            font-size: 10px;
+
+            font-weight: bold;
+
+            padding: 5px 8px;
+
+            border-radius: 20px;
+
+            background: #EDF7EF;
+
+            color: var(--green);
+        }
+
+
+        /* ================= CONNECTOR ================= */
+
+        .connector-card {
+
+            background: var(--purple);
+
+            color: white;
+
+            border-radius: 17px;
+
+            padding: 24px;
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+
+        .connector-card::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 170px;
+
+            height: 170px;
+
+            border-radius: 50%;
+
+            background: var(--accent);
+
+            opacity: 0.1;
+
+            right: -70px;
+
+            top: -60px;
+        }
+
+
+        .connector-card h3 {
+
+            font-size: 18px;
+
+            margin-bottom: 9px;
+        }
+
+
+        .connector-card p {
+
+            color: #DCCADD;
+
+            font-size: 12px;
+
+            line-height: 1.6;
+
+            margin-bottom: 22px;
+        }
+
+
+        .connector-flow {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            margin-bottom: 20px;
+        }
+
+
+        .node {
+
+            flex: 1;
+
+            padding: 13px 8px;
+
+            border-radius: 10px;
+
+            text-align: center;
+
+            background: rgba(255,255,255,0.09);
+
+            border: 1px solid rgba(255,255,255,0.13);
+        }
+
+
+        .node strong {
+
+            display: block;
+
+            font-size: 11px;
+
+            margin-top: 5px;
+        }
+
+
+        .node small {
+
+            color: #CDBBD1;
+
+            font-size: 9px;
+        }
+
+
+        .arrow {
+
+            color: var(--accent);
+
+            font-weight: bold;
+
+            font-size: 20px;
+        }
+
+
+        .connector-button {
+
+            width: 100%;
+
+            border: none;
+
+            padding: 12px;
+
+            border-radius: 9px;
+
+            background: var(--accent);
+
+            color: var(--purple);
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+
+        /* ================= JOBS ================= */
+
+        .job {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 13px;
+
+            padding: 13px 0;
+
+            border-bottom: 1px solid var(--border);
+        }
+
+
+        .job:last-child {
+            border-bottom: none;
+        }
+
+
+        .job-icon {
+
+            width: 40px;
+
+            height: 40px;
+
+            border-radius: 9px;
+
+            background: var(--lavender);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+        }
+
+
+        .job-info {
+
+            flex: 1;
+        }
+
+
+        .job-info strong {
+
+            display: block;
+
+            font-size: 13px;
+
+            margin-bottom: 4px;
+        }
+
+
+        .job-info small {
+
+            color: var(--muted);
+
+            font-size: 11px;
+        }
+
+
+        .job-count {
+
+            font-size: 12px;
+
+            font-weight: bold;
+
+            color: var(--purple);
+        }
+
+
+        /* ================= ACTIVITY ================= */
+
+        .activity {
+
+            display: flex;
+
+            gap: 12px;
+
+            padding: 13px 0;
+
+            border-bottom: 1px solid var(--border);
+        }
+
+
+        .activity:last-child {
+            border-bottom: none;
+        }
+
+
+        .activity-dot {
+
+            width: 9px;
+
+            height: 9px;
+
+            background: var(--accent);
+
+            border-radius: 50%;
+
+            margin-top: 5px;
+        }
+
+
+        .activity p {
+
+            font-size: 12px;
+
+            line-height: 1.5;
+        }
+
+
+        .activity small {
+
+            color: var(--muted);
+
+            font-size: 10px;
+        }
+
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 1050px) {
+
+            .stats {
+
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .dashboard-grid {
+
+                grid-template-columns: 1fr;
+            }
+        }
+
+
+        @media (max-width: 750px) {
+
+            .sidebar {
+
+                width: 70px;
+
+                padding: 20px 10px;
+            }
+
+            .logo {
+
+                font-size: 0;
+
+                text-align: center;
+            }
+
+            .logo::after {
+
+                content: "S";
+
+                font-size: 25px;
+
+                color: var(--accent);
+            }
+
+            .company-mini,
+            .nav-title,
+            .bottom-nav {
+
+                display: none;
+            }
+
+            .nav-item {
+
+                text-align: center;
+
+                font-size: 0;
+            }
+
+            .nav-item:first-letter {
+
+                font-size: 18px;
+            }
+
+            .main {
+
+                margin-left: 70px;
+
+                padding: 25px 20px;
+            }
+        }
+
+
+        @media (max-width: 500px) {
+
+            .stats {
+
+                grid-template-columns: 1fr;
+            }
+
+            .topbar {
+
+                align-items: flex-start;
+            }
+
+            .profile-info {
+
+                display: none;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= SIDEBAR ================= -->
+
+<aside class="sidebar">
+
+    <div class="logo">
+        Skill<span>Stupor</span>
+    </div>
+
+
+    <div class="company-mini">
+
+        <small>COMPANY ACCOUNT</small>
+
+        <strong>TechNova Pvt. Ltd.</strong>
+
+        <span class="type">
+            PARENT / HQ
+        </span>
+
+    </div>
+
+
+    <div class="nav-title">
+        Workspace
+    </div>
+
+
+    <button class="nav-item active">
+        📊 &nbsp; Overview
+    </button>
+    <button class="nav-item" onclick="window.location.href='j-parent-branch-posts.html'">
+    🏬 &nbsp; Post
+    </button>
+    <button class="nav-item">
+        👥 &nbsp; Talent Pool
+    </button>
+
+    <button class="nav-item">
+        💼 &nbsp; Job Openings
+    </button>
+
+    <button class="nav-item">
+        🏬 &nbsp; Child Branches
+    </button>
+    
+
+
+    <div class="nav-title" style="margin-top:25px;">
+        Company Network
+    </div>
+
+
+    <button class="nav-item">
+        🔗 &nbsp; Branch Connector
+    </button>
+
+    <button class="nav-item">
+        📈 &nbsp; Reports
+    </button>
+
+
+    <div class="bottom-nav">
+
+        <button class="nav-item">
+            ⚙️ &nbsp; Settings
+        </button>
+
+        <button class="nav-item">
+            🚪 &nbsp; Log out
+        </button>
+
+    </div>
+
+</aside>
+
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="main">
+
+
+    <!-- TOP BAR -->
+
+    <div class="topbar">
+
+        <div class="welcome">
+
+            <h1>Company Overview 👋</h1>
+
+            <p>
+                Manage your workforce across every connected branch.
+            </p>
+
+        </div>
+
+
+        <div class="profile">
+
+            <div class="profile-avatar">
+                TN
+            </div>
+
+            <div class="profile-info">
+
+                <strong>TechNova Admin</strong>
+
+                <small>Parent Company</small>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================= STATS ================= -->
+
+    <section class="stats">
+
+
+        <div class="stat-card">
+
+            <div class="stat-top">
+
+                <small>Total Employees</small>
+
+                <div class="stat-icon">
+                    👥
+                </div>
+
+            </div>
+
+            <h2>1,248</h2>
+
+            <span class="growth">
+                ↑ 8.4% this month
+            </span>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-top">
+
+                <small>Active Jobs</small>
+
+                <div class="stat-icon">
+                    💼
+                </div>
+
+            </div>
+
+            <h2>36</h2>
+
+            <span class="growth">
+                ↑ 5 new this week
+            </span>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-top">
+
+                <small>Applications</small>
+
+                <div class="stat-icon">
+                    📄
+                </div>
+
+            </div>
+
+            <h2>482</h2>
+
+            <span class="growth">
+                ↑ 14.2% this month
+            </span>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-top">
+
+                <small>Connected Branches</small>
+
+                <div class="stat-icon">
+                    🏬
+                </div>
+
+            </div>
+
+            <h2>08</h2>
+
+            <span class="growth">
+                All systems connected
+            </span>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================= BRANCH + CONNECTOR ================= -->
+
+    <section class="dashboard-grid">
+
+
+        <!-- CHILD BRANCHES -->
+
+        <div class="card">
+
+            <div class="card-header">
+
+                <h3>Child Branches</h3>
+
+                <button class="view-button">
+                    View all →
+                </button>
+
+            </div>
+
+
+            <div class="branch">
+
+                <div class="branch-icon">
+                    🏢
+                </div>
+
+                <div class="branch-info">
+
+                    <strong>Delhi Branch</strong>
+
+                    <small>
+                        324 employees · 8 active jobs
+                    </small>
+
+                </div>
+
+                <span class="branch-status">
+                    CONNECTED
+                </span>
+
+            </div>
+
+
+            <div class="branch">
+
+                <div class="branch-icon">
+                    🏢
+                </div>
+
+                <div class="branch-info">
+
+                    <strong>Mumbai Branch</strong>
+
+                    <small>
+                        287 employees · 7 active jobs
+                    </small>
+
+                </div>
+
+                <span class="branch-status">
+                    CONNECTED
+                </span>
+
+            </div>
+
+
+            <div class="branch">
+
+                <div class="branch-icon">
+                    🏢
+                </div>
+
+                <div class="branch-info">
+
+                    <strong>Bangalore Branch</strong>
+
+                    <small>
+                        412 employees · 13 active jobs
+                    </small>
+
+                </div>
+
+                <span class="branch-status">
+                    CONNECTED
+                </span>
+
+            </div>
+
+
+            <div class="branch">
+
+                <div class="branch-icon">
+                    🏢
+                </div>
+
+                <div class="branch-info">
+
+                    <strong>Pune Branch</strong>
+
+                    <small>
+                        225 employees · 8 active jobs
+                    </small>
+
+                </div>
+
+                <span class="branch-status">
+                    CONNECTED
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- CONNECTOR -->
+
+        <div class="connector-card">
+
+            <h3>🔗 Branch Connector</h3>
+
+            <p>
+                Connect child branches to the parent company
+                and keep workforce data synchronized across
+                your organization.
+            </p>
+
+
+            <div class="connector-flow">
+
+                <div class="node">
+
+                    🏢
+
+                    <strong>Parent</strong>
+
+                    <small>HQ</small>
+
+                </div>
+
+
+                <div class="arrow">
+                    →
+                </div>
+
+
+                <div class="node">
+
+                    🏬
+
+                    <strong>Child</strong>
+
+                    <small>Branch</small>
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="connector-button"
+                onclick="connectBranch()">
+
+                + Connect a Child Branch
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================= JOBS + ACTIVITY ================= -->
+
+    <section class="dashboard-grid">
+
+
+        <!-- JOBS -->
+
+        <div class="card">
+
+            <div class="card-header">
+
+                <h3>Company Job Openings</h3>
+
+                <button class="view-button">
+                    Manage jobs →
+                </button>
+
+            </div>
+
+
+            <div class="job">
+
+                <div class="job-icon">
+                    💻
+                </div>
+
+                <div class="job-info">
+
+                    <strong>
+                        Software Engineer
+                    </strong>
+
+                    <small>
+                        Delhi · Full Time
+                    </small>
+
+                </div>
+
+                <span class="job-count">
+                    48 applicants
+                </span>
+
+            </div>
+
+            <div class="job">
+
+                <div class="job-icon">
+                    🤖
+                </div>
+
+                <div class="job-info">
+
+                    <strong>
+                        AI/ML Intern
+                    </strong>
+
+                    <small>
+                        Bangalore · Internship
+                    </small>
+
+                </div>
+
+                <span class="job-count">
+                    72 applicants
+                </span>
+
+            </div>
+
+
+            <div class="job">
+
+                <div class="job-icon">
+                    🎨
+                </div>
+
+                <div class="job-info">
+
+                    <strong>
+                        UI/UX Designer
+                    </strong>
+
+                    <small>
+                        Mumbai · Full Time
+                    </small>
+
+                </div>
+
+                <span class="job-count">
+                    31 applicants
+                </span>
+
+            </div>
+
+
+            <div class="job">
+
+                <div class="job-icon">
+                    📊
+                </div>
+
+                <div class="job-info">
+
+                    <strong>
+                        Data Analyst
+                    </strong>
+
+                    <small>
+                        Pune · Full Time
+                    </small>
+
+                </div>
+
+                <span class="job-count">
+                    26 applicants
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ACTIVITY -->
+
+        <div class="card">
+
+            <div class="card-header">
+
+                <h3>Recent Activity</h3>
+
+                <button class="view-button">
+                    View all
+                </button>
+
+            </div>
+
+
+            <div class="activity">
+
+                <div class="activity-dot"></div>
+
+                <div>
+
+                    <p>
+                        Delhi Branch posted a new
+                        Software Engineer opening.
+                    </p>
+
+                    <small>
+                        12 minutes ago
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="activity">
+
+                <div class="activity-dot"></div>
+
+                <div>
+
+                    <p>
+                        Mumbai Branch connected
+                        successfully.
+                    </p>
+
+                    <small>
+                        2 hours ago
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="activity">
+
+                <div class="activity-dot"></div>
+
+                <div>
+
+                    <p>
+                        18 new candidates entered
+                        the company talent pool.
+                    </p>
+
+                    <small>
+                        Yesterday
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="activity">
+
+                <div class="activity-dot"></div>
+
+                <div>
+
+                    <p>
+                        Bangalore Branch updated
+                        its hiring requirements.
+                    </p>
+
+                    <small>
+                        Yesterday
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+
+<script>
+
+
+    function connectBranch() {
+
+        alert(
+            "Branch Connector\n\nThis is where the Parent Company will generate a connection code or invitation for a Child Branch."
+        );
+
+    }
+
+
+    const navItems =
+        document.querySelectorAll(".nav-item");
+
+
+    navItems.forEach(item => {
+
+        item.addEventListener("click", function() {
+
+            navItems.forEach(nav =>
+                nav.classList.remove("active")
+            );
+
+            this.classList.add("active");
+
+        });
+
+    });
+
+
+</script>
+
+
+</body>
+
+</html>

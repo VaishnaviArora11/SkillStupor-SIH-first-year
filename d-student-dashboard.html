@@ -1,0 +1,1969 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SkillStupor — Student Dashboard</title>
+
+<style>
+
+:root {
+    --primary: #EBA3FB;
+    --primary-dark: #D77BEF;
+    --background: #FFF7E8;
+    --text: #35143D;
+    --sage: #A8C3A0;
+    --white: #FFFFFF;
+    --border: #ead9e9;
+    --shadow: 0 10px 30px rgba(53,20,61,0.08);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--background);
+    color: var(--text);
+}
+
+/* ---------------- NAVBAR ---------------- */
+
+.navbar {
+    height: 72px;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 35px;
+
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 23px;
+    font-weight: 800;
+}
+
+.logo span {
+    color: var(--primary-dark);
+}
+
+.nav-links {
+    display: flex;
+    gap: 25px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.nav-links a:hover {
+    color: var(--primary-dark);
+}
+
+.ct-button {
+    background: var(--text);
+    color: white;
+    border: none;
+
+    padding: 11px 18px;
+    border-radius: 10px;
+
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* ---------------- LAYOUT ---------------- */
+
+.container {
+    max-width: 1450px;
+    margin: auto;
+    padding: 30px;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 25px;
+}
+
+/* ---------------- SIDEBAR ---------------- */
+
+.sidebar {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: var(--shadow);
+
+    height: fit-content;
+    position: sticky;
+    top: 100px;
+}
+
+.profile {
+    text-align: center;
+}
+
+.profile img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+
+    object-fit: cover;
+
+    border: 5px solid var(--primary);
+}
+
+.profile h2 {
+    margin-top: 12px;
+    font-size: 20px;
+}
+
+.profile p {
+    color: #806c83;
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+.github-handle {
+    margin-top: 15px;
+    padding: 10px;
+    background: #f8edf8;
+    border-radius: 10px;
+    font-size: 13px;
+}
+
+.sidebar-menu {
+    margin-top: 30px;
+}
+
+.sidebar-menu button {
+    width: 100%;
+    border: none;
+    background: transparent;
+
+    padding: 13px;
+    text-align: left;
+
+    border-radius: 10px;
+    margin-bottom: 5px;
+
+    cursor: pointer;
+    color: var(--text);
+    font-weight: 600;
+}
+
+.sidebar-menu button:hover {
+    background: #f8e9fa;
+}
+
+/* ---------------- MAIN ---------------- */
+
+.welcome {
+    margin-bottom: 25px;
+}
+
+.welcome h1 {
+    font-size: 31px;
+}
+
+.welcome p {
+    color: #806c83;
+    margin-top: 6px;
+}
+
+/* ---------------- CARDS ---------------- */
+
+.card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: var(--shadow);
+}
+
+.card-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 20px;
+}
+
+.card-title h2 {
+    font-size: 19px;
+}
+
+.card-title span {
+    font-size: 12px;
+    color: #8a768d;
+}
+
+/* ---------------- STATS ---------------- */
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.stat {
+    background: var(--white);
+    border-radius: 17px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+}
+
+.stat small {
+    color: #806c83;
+}
+
+.stat h2 {
+    margin-top: 8px;
+    font-size: 28px;
+}
+
+/* ---------------- GITHUB ---------------- */
+
+.github-box {
+    margin-bottom: 25px;
+}
+
+.github-input {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.github-input input {
+    flex: 1;
+
+    padding: 13px;
+
+    border: 1px solid var(--border);
+    border-radius: 10px;
+
+    outline: none;
+}
+
+.github-input button {
+    background: var(--text);
+    color: white;
+
+    border: none;
+    border-radius: 10px;
+
+    padding: 0 20px;
+
+    cursor: pointer;
+}
+
+.github-profile {
+    display: none;
+}
+
+/* ---------------- PROJECTS ---------------- */
+
+.projects {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 15px;
+}
+
+.project {
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    padding: 18px;
+}
+
+.project h3 {
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+.project p {
+    color: #806c83;
+    font-size: 13px;
+    min-height: 35px;
+}
+
+.project-bottom {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+
+    font-size: 12px;
+}
+
+.language {
+    background: #f4e8f5;
+    padding: 5px 8px;
+    border-radius: 7px;
+}
+
+/* ---------------- GRID ---------------- */
+
+.two-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+    margin-top: 25px;
+}
+
+/* ---------------- COMMAND BOX ---------------- */
+
+.command-box {
+    background: linear-gradient(
+        135deg,
+        #f6d8fb,
+        #fff7e8
+    );
+
+    border-radius: 20px;
+    padding: 25px;
+
+    margin-top: 25px;
+}
+
+.command-box h2 {
+    margin-bottom: 8px;
+}
+
+.command-box p {
+    color: #725b75;
+    font-size: 13px;
+    margin-bottom: 15px;
+}
+
+.command-input {
+    display: flex;
+    gap: 10px;
+}
+
+.command-input input {
+    flex: 1;
+
+    padding: 15px;
+
+    border-radius: 12px;
+    border: 1px solid var(--border);
+
+    outline: none;
+}
+
+.command-input button {
+    background: var(--text);
+    color: white;
+
+    border: none;
+    border-radius: 12px;
+
+    padding: 0 20px;
+
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* ---------------- SKILLS ---------------- */
+
+.skill-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+}
+
+.skill {
+    background: #f6e6f8;
+    padding: 9px 13px;
+    border-radius: 20px;
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* ---------------- TIMELINE ---------------- */
+
+.timeline {
+    position: relative;
+}
+
+.timeline-item {
+    display: flex;
+    gap: 15px;
+
+    margin-bottom: 22px;
+}
+
+.timeline-dot {
+    width: 12px;
+    height: 12px;
+
+    background: var(--primary-dark);
+
+    border-radius: 50%;
+
+    margin-top: 5px;
+
+    flex-shrink: 0;
+}
+
+.timeline-item h4 {
+    font-size: 14px;
+}
+
+.timeline-item p {
+    font-size: 12px;
+    color: #806c83;
+    margin-top: 4px;
+}
+
+/* ---------------- GOALS ---------------- */
+
+.goal-input {
+    width: 100%;
+
+    min-height: 100px;
+
+    border: 1px solid var(--border);
+    border-radius: 12px;
+
+    padding: 14px;
+
+    resize: none;
+    outline: none;
+
+    font-family: inherit;
+}
+
+.goal-button {
+    margin-top: 12px;
+
+    background: var(--primary-dark);
+    color: white;
+
+    border: none;
+    border-radius: 10px;
+
+    padding: 11px 18px;
+
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* ---------------- RECOMMENDATIONS ---------------- */
+
+.recommendation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 14px;
+
+    border: 1px solid var(--border);
+    border-radius: 12px;
+
+    margin-bottom: 10px;
+}
+
+.recommendation button {
+    background: var(--sage);
+
+    border: none;
+    border-radius: 8px;
+
+    padding: 7px 10px;
+
+    cursor: pointer;
+}
+
+/* ---------------- ROADMAP ---------------- */
+
+.roadmap {
+    margin-top: 15px;
+}
+
+.roadmap-step {
+    display: flex;
+    gap: 15px;
+
+    margin-bottom: 18px;
+}
+
+.step-number {
+    width: 32px;
+    height: 32px;
+
+    border-radius: 50%;
+
+    background: var(--primary);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: bold;
+}
+
+.roadmap-step h4 {
+    margin-bottom: 4px;
+}
+
+.roadmap-step p {
+    font-size: 12px;
+    color: #806c83;
+}
+
+/* ---------------- RESPONSIVE ---------------- */
+
+@media(max-width: 1000px) {
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        position: static;
+    }
+
+    .stats {
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .two-column {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media(max-width: 650px) {
+
+    .navbar {
+        padding: 0 15px;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .container {
+        padding: 15px;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .projects {
+        grid-template-columns: 1fr;
+    }
+
+    .github-input,
+    .command-input {
+        flex-direction: column;
+    }
+
+    .github-input button,
+    .command-input button {
+        padding: 12px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        Skill<span>Stupor</span>
+    </div>
+
+    <div class="nav-links">
+        <a href="#dashboard">Dashboard</a>
+        <a href="#skills">Skills</a>
+        <a href="#goals">Goals</a>
+        <a href="#roadmap">Roadmap</a>
+    </div>
+
+    <a href="e-careertwin.html" class="ct-button">
+    Career Twin →
+</a>
+
+</nav>
+
+
+<!-- ================= DASHBOARD ================= -->
+
+<div class="container" id="dashboard">
+
+<div class="dashboard-grid">
+
+<!-- ================= SIDEBAR ================= -->
+
+<aside class="sidebar">
+
+    <div class="profile">
+
+        <img
+            id="profileImage"
+            src="https://github.com/identicons/student.png"
+            alt="Profile">
+
+        <h2 id="username">
+            Student
+        </h2>
+
+        <p>
+            CSE Student
+        </p>
+
+        <div class="github-handle">
+            🐙 <span id="githubName">GitHub not connected</span>
+        </div>
+
+    </div>
+
+
+    <div class="sidebar-menu">
+
+        <button onclick="scrollToSection('dashboard')">
+            🏠 Dashboard
+        </button>
+
+        <button onclick="scrollToSection('github')">
+            🐙 GitHub
+        </button>
+
+        <button onclick="scrollToSection('skills')">
+            🧠 Skills
+        </button>
+
+        <button onclick="scrollToSection('goals')">
+            🎯 Career Goals
+        </button>
+
+        <button onclick="scrollToSection('roadmap')">
+            🗺️ Skill Roadmap
+        </button>
+        <button class="nav-item" onclick="window.location.href='l-bugbounty-student.html'">
+            🏬 &nbsp; Bug Bounty
+        </button>
+
+    </div>
+
+</aside>
+
+
+<!-- ================= MAIN CONTENT ================= -->
+
+<main>
+
+    <div class="welcome">
+
+        <h1>
+            Hey, <span id="welcomeName">Student</span> 👋
+        </h1>
+
+        <p>
+            Your progress. Your skills. Your future.
+        </p>
+
+    </div>
+
+
+    <!-- ================= STATS ================= -->
+
+    <div class="stats">
+
+        <div class="stat">
+
+            <small>Repositories</small>
+
+            <h2 id="repoCount">
+                12
+            </h2>
+
+        </div>
+
+
+        <div class="stat">
+
+            <small>Total Commits</small>
+
+            <h2 id="commitCount">
+                148
+            </h2>
+
+        </div>
+
+
+        <div class="stat">
+
+            <small>Skills</small>
+
+            <h2 id="skillCount">
+                6
+            </h2>
+
+        </div>
+
+
+        <div class="stat">
+
+            <small>Projects</small>
+
+            <h2 id="projectCount">
+                8
+            </h2>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= GITHUB ================= -->
+
+    <section class="card github-box" id="github">
+
+        <div class="card-title">
+
+            <h2>
+                🐙 GitHub Activity
+            </h2>
+
+            <span>
+                Live profile data
+            </span>
+
+        </div>
+
+
+        <div class="github-input">
+
+            <input
+                id="githubInput"
+                placeholder="Enter your GitHub username">
+
+            <button onclick="connectGithub()">
+                Connect GitHub
+            </button>
+
+        </div>
+
+
+        <div class="github-profile" id="githubProfile">
+
+            <div class="card-title">
+
+                <h2>
+                    Recent Projects
+                </h2>
+
+                <span id="githubBio"></span>
+
+            </div>
+
+
+            <div class="projects" id="projects">
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= COMMAND CENTER ================= -->
+
+    <section class="command-box">
+
+        <h2>
+            ✨ Tell Career Twin what you did
+        </h2>
+
+        <p>
+            Just type naturally. Career Twin will understand where it belongs.
+        </p>
+
+
+        <div class="command-input">
+
+            <input
+                id="commandInput"
+                placeholder="e.g. completed C++ on 7 Sept">
+
+            <button onclick="processCommand()">
+                Add →
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= SKILLS + TIMELINE ================= -->
+
+    <div class="two-column">
+
+
+        <!-- SKILLS -->
+
+        <section class="card" id="skills">
+
+            <div class="card-title">
+
+                <h2>
+                    🧠 My Skills
+                </h2>
+
+                <span>
+                    Current skill set
+                </span>
+
+            </div>
+
+
+            <div class="skill-list" id="skillList">
+
+                <div class="skill">
+                    Python
+                </div>
+
+                <div class="skill">
+                    C++
+                </div>
+
+                <div class="skill">
+                    HTML
+                </div>
+
+                <div class="skill">
+                    CSS
+                </div>
+
+                <div class="skill">
+                    Git
+                </div>
+
+                <div class="skill">
+                    Problem Solving
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- TIMELINE -->
+
+        <section class="card">
+
+            <div class="card-title">
+
+                <h2>
+                    🕒 My Timeline
+                </h2>
+
+                <span>
+                    Latest activity
+                </span>
+
+            </div>
+
+
+            <div class="timeline" id="timeline">
+
+                <div class="timeline-item">
+
+                    <div class="timeline-dot"></div>
+
+                    <div>
+
+                        <h4>
+                            Started learning C++
+                        </h4>
+
+                        <p>
+                            Today
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="timeline-item">
+
+                    <div class="timeline-dot"></div>
+
+                    <div>
+
+                        <h4>
+                            Created a GitHub project
+                        </h4>
+
+                        <p>
+                            3 days ago
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="timeline-item">
+
+                    <div class="timeline-dot"></div>
+
+                    <div>
+
+                        <h4>
+                            Joined Career Twin
+                        </h4>
+
+                        <p>
+                            1 week ago
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <!-- ================= GOALS ================= -->
+
+    <section class="card" id="goals" style="margin-top:25px;">
+
+        <div class="card-title">
+
+            <h2>
+                🎯 My Long-Term Goal
+            </h2>
+
+            <span>
+                Where do you want to go?
+            </span>
+
+        </div>
+
+
+        <textarea
+            id="goalInput"
+            class="goal-input"
+            placeholder="Example: I want to get a software engineering job at Microsoft by 25..."></textarea>
+
+
+        <button
+            class="goal-button"
+            onclick="generateRoadmap()">
+
+            Build My Career Roadmap →
+
+        </button>
+
+
+        <div id="goalResult" style="margin-top:20px;">
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= RECOMMENDATIONS ================= -->
+
+    <div class="two-column">
+
+        <section class="card">
+
+            <div class="card-title">
+
+                <h2>
+                    ✨ Recommended Skills
+                </h2>
+
+                <span>
+                    Based on your goal
+                </span>
+
+            </div>
+
+
+            <div id="recommendations">
+
+                <div class="recommendation">
+
+                    <span>
+                        Data Structures & Algorithms
+                    </span>
+
+                    <button onclick="addSkill('DSA')">
+                        + Add
+                    </button>
+
+                </div>
+
+
+                <div class="recommendation">
+
+                    <span>
+                        System Design
+                    </span>
+
+                    <button onclick="addSkill('System Design')">
+                        + Add
+                    </button>
+
+                </div>
+
+
+                <div class="recommendation">
+
+                    <span>
+                        Advanced Git & GitHub
+                    </span>
+
+                    <button onclick="addSkill('Advanced Git')">
+                        + Add
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= ROADMAP ================= -->
+
+        <section class="card" id="roadmap">
+
+            <div class="card-title">
+
+                <h2>
+                    🗺️ Career Roadmap
+                </h2>
+
+                <span>
+                    Your path forward
+                </span>
+
+            </div>
+
+
+            <div class="roadmap" id="roadmapContent">
+
+                <div class="roadmap-step">
+
+                    <div class="step-number">
+                        1
+                    </div>
+
+                    <div>
+
+                        <h4>
+                            Build Core Programming
+                        </h4>
+
+                        <p>
+                            C++, Python, Git and problem solving.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="roadmap-step">
+
+                    <div class="step-number">
+                        2
+                    </div>
+
+                    <div>
+
+                        <h4>
+                            Master DSA
+                        </h4>
+
+                        <p>
+                            Arrays, trees, graphs, recursion and algorithms.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="roadmap-step">
+
+                    <div class="step-number">
+                        3
+                    </div>
+
+                    <div>
+
+                        <h4>
+                            Build Strong Projects
+                        </h4>
+
+                        <p>
+                            Create projects that demonstrate real engineering ability.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="roadmap-step">
+
+                    <div class="step-number">
+                        4
+                    </div>
+
+                    <div>
+
+                        <h4>
+                            Internship Ready
+                        </h4>
+
+                        <p>
+                            Resume, GitHub, interview preparation and applications.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+</main>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   BASIC DATA
+===================================================== */
+
+let skills = JSON.parse(
+    localStorage.getItem("careerTwinSkills")
+) || [
+    "Python",
+    "C++",
+    "HTML",
+    "CSS",
+    "Git",
+    "Problem Solving"
+];
+
+let timeline = JSON.parse(
+    localStorage.getItem("careerTwinTimeline")
+) || [];
+
+
+/* =====================================================
+   DISPLAY SKILLS
+===================================================== */
+
+function renderSkills() {
+
+    const list = document.getElementById("skillList");
+
+    list.innerHTML = "";
+
+    skills.forEach(skill => {
+
+        const div = document.createElement("div");
+
+        div.className = "skill";
+
+        div.innerText = skill;
+
+        list.appendChild(div);
+
+    });
+
+    document.getElementById("skillCount").innerText =
+        skills.length;
+
+    localStorage.setItem(
+        "careerTwinSkills",
+        JSON.stringify(skills)
+    );
+}
+
+
+/* =====================================================
+   ADD SKILL
+===================================================== */
+
+function addSkill(skill) {
+
+    const exists = skills.some(
+        s => s.toLowerCase() === skill.toLowerCase()
+    );
+
+    if (!exists) {
+
+        skills.push(skill);
+
+        renderSkills();
+
+        addTimeline(
+            `Learned ${skill}`,
+            "Just now"
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   TIMELINE
+===================================================== */
+
+function addTimeline(text, date) {
+
+    timeline.unshift({
+        text: text,
+        date: date
+    });
+
+    localStorage.setItem(
+        "careerTwinTimeline",
+        JSON.stringify(timeline)
+    );
+
+    renderTimeline();
+}
+
+
+function renderTimeline() {
+
+    const container =
+        document.getElementById("timeline");
+
+    if (timeline.length === 0) return;
+
+    container.innerHTML = "";
+
+    timeline.slice(0,8).forEach(item => {
+
+        const div =
+            document.createElement("div");
+
+        div.className = "timeline-item";
+
+        div.innerHTML = `
+
+            <div class="timeline-dot"></div>
+
+            <div>
+
+                <h4>${item.text}</h4>
+
+                <p>${item.date}</p>
+
+            </div>
+
+        `;
+
+        container.appendChild(div);
+
+    });
+
+}
+
+
+/* =====================================================
+   NATURAL LANGUAGE COMMAND
+===================================================== */
+
+function processCommand() {
+
+    const input =
+        document.getElementById("commandInput");
+
+    const text =
+        input.value.trim();
+
+    if (!text) return;
+
+
+    const lower = text.toLowerCase();
+
+
+    /* -------- NEW SKILL -------- */
+
+    if (
+        lower.includes("new skill") ||
+        lower.includes("learned") ||
+        lower.includes("learnt") ||
+        lower.includes("learn")
+    ) {
+
+        let skill = extractSkill(text);
+
+        if (skill) {
+
+            addSkill(skill);
+
+            alert(
+                `✨ Added "${skill}" to your Skills section!`
+            );
+
+        }
+
+    }
+
+
+    /* -------- COMPLETED -------- */
+
+    else if (
+        lower.includes("completed") ||
+        lower.includes("finished")
+    ) {
+
+        addTimeline(
+            text,
+            "Just now"
+        );
+
+        alert(
+            "🕒 Added to your Career Timeline!"
+        );
+
+    }
+
+
+    /* -------- PROJECT -------- */
+
+    else if (
+        lower.includes("project") ||
+        lower.includes("built") ||
+        lower.includes("created")
+    ) {
+
+        addTimeline(
+            text,
+            "Just now"
+        );
+
+        alert(
+            "💻 Project activity added to your timeline!"
+        );
+
+    }
+
+
+    /* -------- DEFAULT -------- */
+
+    else {
+
+        addTimeline(
+            text,
+            "Just now"
+        );
+
+        alert(
+            "✨ Added to your Career Twin timeline!"
+        );
+
+    }
+
+
+    input.value = "";
+
+}
+
+
+/* =====================================================
+   SIMPLE SKILL EXTRACTION
+===================================================== */
+
+function extractSkill(text) {
+
+    const knownSkills = [
+        "C++",
+        "Python",
+        "Java",
+        "JavaScript",
+        "HTML",
+        "CSS",
+        "SQL",
+        "MySQL",
+        "Git",
+        "GitHub",
+        "React",
+        "Node.js",
+        "DSA",
+        "Machine Learning",
+        "AI",
+        "Data Structures"
+    ];
+
+    for (const skill of knownSkills) {
+
+        if (
+            text.toLowerCase()
+                .includes(skill.toLowerCase())
+        ) {
+            return skill;
+        }
+
+    }
+
+    /*
+       Fallback:
+       "new skill learned Docker"
+       -> Docker
+    */
+
+    const match =
+        text.match(
+            /(?:learned|learnt|learn|skill)\s+(?:is\s+)?(.+)/i
+        );
+
+    if (match) {
+
+        return match[1]
+            .replace(/[.!?]/g,"")
+            .trim();
+
+    }
+
+    return null;
+}
+
+
+/* =====================================================
+   GITHUB CONNECTION
+===================================================== */
+
+async function connectGithub() {
+
+    const username =
+        document.getElementById("githubInput")
+            .value.trim();
+
+    if (!username) {
+
+        alert(
+            "Please enter a GitHub username."
+        );
+
+        return;
+    }
+
+
+    try {
+
+        const userResponse =
+            await fetch(
+                `https://api.github.com/users/${username}`
+            );
+
+
+        if (!userResponse.ok) {
+
+            throw new Error(
+                "GitHub user not found"
+            );
+
+        }
+
+
+        const user =
+            await userResponse.json();
+
+
+        /* PROFILE */
+
+        document.getElementById(
+            "profileImage"
+        ).src = user.avatar_url;
+
+
+        document.getElementById(
+            "username"
+        ).innerText =
+            user.name || user.login;
+
+
+        document.getElementById(
+            "welcomeName"
+        ).innerText =
+            user.name || user.login;
+
+
+        document.getElementById(
+            "githubName"
+        ).innerText =
+            "@" + user.login;
+
+
+        document.getElementById(
+            "githubBio"
+        ).innerText =
+            user.bio || "GitHub profile";
+
+
+        document.getElementById(
+            "repoCount"
+        ).innerText =
+            user.public_repos;
+
+
+        /* REPOSITORIES */
+
+        const repoResponse =
+            await fetch(
+                `https://api.github.com/users/${username}/repos?sort=updated&per_page=10`
+            );
+
+
+        const repos =
+            await repoResponse.json();
+
+
+        const projects =
+            document.getElementById("projects");
+
+
+        projects.innerHTML = "";
+
+
+        repos.forEach(repo => {
+
+            const card =
+                document.createElement("div");
+
+            card.className =
+                "project";
+
+
+            card.innerHTML = `
+
+                <h3>
+                    ${repo.name}
+                </h3>
+
+                <p>
+                    ${
+                        repo.description ||
+                        "No description provided."
+                    }
+                </p>
+
+                <div class="project-bottom">
+
+                    <span class="language">
+                        ${
+                            repo.language ||
+                            "Code"
+                        }
+                    </span>
+
+                    <span>
+                        ⭐ ${repo.stargazers_count}
+                    </span>
+
+                </div>
+
+            `;
+
+
+            projects.appendChild(card);
+
+        });
+
+
+        document.getElementById(
+            "githubProfile"
+        ).style.display = "block";
+
+
+        document.getElementById(
+            "projectCount"
+        ).innerText =
+            repos.length;
+
+
+        alert(
+            `🐙 Connected to GitHub as @${user.login}`
+        );
+
+
+    } catch(error) {
+
+        alert(
+            "Could not connect to that GitHub account."
+        );
+
+        console.error(error);
+
+    }
+
+}
+
+
+/* =====================================================
+   CAREER GOAL ENGINE
+===================================================== */
+
+function generateRoadmap() {
+
+    const goal =
+        document.getElementById("goalInput")
+            .value.trim();
+
+    if (!goal) {
+
+        alert(
+            "Tell Career Twin your long-term goal first!"
+        );
+
+        return;
+    }
+
+
+    const lower =
+        goal.toLowerCase();
+
+
+    let recommendations = [];
+
+
+    /* MICROSOFT / SWE */
+
+    if (
+        lower.includes("microsoft") ||
+        lower.includes("software engineer") ||
+        lower.includes("swe")
+    ) {
+
+        recommendations = [
+            "Data Structures & Algorithms",
+            "Advanced C++",
+            "Object-Oriented Programming",
+            "System Design",
+            "Git & GitHub",
+            "Operating Systems",
+            "Computer Networks",
+            "Database Management",
+            "Problem Solving",
+            "Technical Interview Skills"
+        ];
+
+    }
+
+
+    /* AI */
+
+    else if (
+        lower.includes("ai") ||
+        lower.includes("machine learning")
+    ) {
+
+        recommendations = [
+            "Python",
+            "Linear Algebra",
+            "Statistics",
+            "Machine Learning",
+            "Deep Learning",
+            "Data Structures",
+            "NumPy",
+            "Pandas",
+            "PyTorch"
+        ];
+
+    }
+
+
+    /* WEB DEV */
+
+    else if (
+        lower.includes("web") ||
+        lower.includes("frontend") ||
+        lower.includes("backend")
+    ) {
+
+        recommendations = [
+            "HTML",
+            "CSS",
+            "JavaScript",
+            "React",
+            "Node.js",
+            "REST APIs",
+            "Databases",
+            "Git & GitHub",
+            "Authentication"
+        ];
+
+    }
+
+
+    /* DEFAULT */
+
+    else {
+
+        recommendations = [
+            "Programming Fundamentals",
+            "Data Structures",
+            "Algorithms",
+            "Git & GitHub",
+            "Communication",
+            "Problem Solving",
+            "Project Development",
+            "Interview Preparation"
+        ];
+
+    }
+
+
+    renderRecommendations(
+        recommendations
+    );
+
+    renderGoalRoadmap(
+        recommendations,
+        goal
+    );
+
+
+    document.getElementById(
+        "goalResult"
+    ).innerHTML = `
+
+        <div style="
+            background:#f8edf8;
+            padding:15px;
+            border-radius:12px;
+        ">
+
+            <strong>
+                🎯 Career Twin Goal
+            </strong>
+
+            <p style="
+                margin-top:6px;
+                color:#725b75;
+                font-size:13px;
+            ">
+                ${goal}
+            </p>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =====================================================
+   RECOMMENDATIONS
+===================================================== */
+
+function renderRecommendations(list) {
+
+    const container =
+        document.getElementById(
+            "recommendations"
+        );
+
+
+    container.innerHTML = "";
+
+
+    list.slice(0,8).forEach(skill => {
+
+        const div =
+            document.createElement("div");
+
+
+        div.className =
+            "recommendation";
+
+
+        div.innerHTML = `
+
+            <span>
+                ${skill}
+            </span>
+
+            <button
+                onclick="addSkill('${skill}')">
+
+                + Add
+
+            </button>
+
+        `;
+
+
+        container.appendChild(div);
+
+    });
+
+}
+
+
+/* =====================================================
+   ROADMAP GENERATOR
+===================================================== */
+
+function renderGoalRoadmap(skills, goal) {
+
+    const container =
+        document.getElementById(
+            "roadmapContent"
+        );
+
+
+    const phases = [
+
+        {
+            title: "Foundation",
+            description:
+                "Strengthen programming fundamentals and core computer science concepts."
+        },
+
+        {
+            title: "Skill Building",
+            description:
+                `Focus on ${skills.slice(0,3).join(", ")}.`
+        },
+
+        {
+            title: "Project Portfolio",
+            description:
+                "Build meaningful projects and document them on GitHub."
+        },
+
+        {
+            title: "Experience",
+            description:
+                "Target hackathons, internships, open-source contributions and team projects."
+        },
+
+        {
+            title: "Career Preparation",
+            description:
+                "Prepare your resume, interviews and applications for your target opportunities."
+        }
+
+    ];
+
+
+    container.innerHTML = "";
+
+
+    phases.forEach((phase,index) => {
+
+        const div =
+            document.createElement("div");
+
+
+        div.className =
+            "roadmap-step";
+
+
+        div.innerHTML = `
+
+            <div class="step-number">
+                ${index + 1}
+            </div>
+
+            <div>
+
+                <h4>
+                    ${phase.title}
+                </h4>
+
+                <p>
+                    ${phase.description}
+                </p>
+
+            </div>
+
+        `;
+
+
+        container.appendChild(div);
+
+    });
+
+}
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+function scrollToSection(id) {
+
+    document
+        .getElementById(id)
+        .scrollIntoView({
+            behavior:"smooth"
+        });
+
+}
+
+
+/*
+    Replace this with the actual Career Twin URL
+    once you have deployed the main Career Twin site.
+*/
+
+function goToCareerTwin() {
+
+    alert(
+        "Career Twin connection ready! Replace the URL in goToCareerTwin() with your deployed Career Twin website."
+    );
+
+}
+
+
+/* =====================================================
+   LOAD SAVED DATA
+===================================================== */
+
+renderSkills();
+renderTimeline();
+
+</script>
+
+</body>
+</html>

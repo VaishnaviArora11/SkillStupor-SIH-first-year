@@ -1,0 +1,2644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SkillStupor — Bug Bounties</title>
+
+<style>
+
+:root {
+    --primary: #EBA3FB;
+    --primary-dark: #D77BEF;
+    --background: #FFF7E8;
+    --text: #35143D;
+    --sage: #A8C3A0;
+    --white: #FFFFFF;
+    --border: #ead9e9;
+    --shadow: 0 10px 30px rgba(53,20,61,0.08);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--background);
+    color: var(--text);
+}
+
+
+/* =====================================================
+   NAVBAR
+===================================================== */
+
+.navbar {
+    height: 72px;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 35px;
+
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 23px;
+    font-weight: 800;
+}
+
+.logo span {
+    color: var(--primary-dark);
+}
+
+.nav-links {
+    display: flex;
+    gap: 25px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.nav-links a:hover {
+    color: var(--primary-dark);
+}
+
+.ct-button {
+    background: var(--text);
+    color: white;
+    border: none;
+
+    padding: 11px 18px;
+    border-radius: 10px;
+
+    cursor: pointer;
+    font-weight: bold;
+}
+
+
+/* =====================================================
+   LAYOUT
+===================================================== */
+
+.container {
+    max-width: 1450px;
+    margin: auto;
+    padding: 30px;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 25px;
+}
+
+
+/* =====================================================
+   SIDEBAR
+===================================================== */
+
+.sidebar {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: var(--shadow);
+
+    height: fit-content;
+    position: sticky;
+    top: 100px;
+}
+
+.profile {
+    text-align: center;
+}
+
+.profile img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+
+    object-fit: cover;
+
+    border: 5px solid var(--primary);
+}
+
+.profile h2 {
+    margin-top: 12px;
+    font-size: 20px;
+}
+
+.profile p {
+    color: #806c83;
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+.github-handle {
+    margin-top: 15px;
+    padding: 10px;
+    background: #f8edf8;
+    border-radius: 10px;
+    font-size: 13px;
+}
+
+.sidebar-menu {
+    margin-top: 30px;
+}
+
+.sidebar-menu button {
+    width: 100%;
+    border: none;
+    background: transparent;
+
+    padding: 13px;
+    text-align: left;
+
+    border-radius: 10px;
+    margin-bottom: 5px;
+
+    cursor: pointer;
+    color: var(--text);
+    font-weight: 600;
+}
+
+.sidebar-menu button:hover {
+    background: #f8e9fa;
+}
+
+.sidebar-menu button.active {
+    background: #f8e9fa;
+    color: #5f1d68;
+}
+
+
+/* =====================================================
+   MAIN
+===================================================== */
+
+.welcome {
+    margin-bottom: 25px;
+}
+
+.welcome h1 {
+    font-size: 31px;
+}
+
+.welcome p {
+    color: #806c83;
+    margin-top: 6px;
+}
+
+
+/* =====================================================
+   BOUNTY HERO
+===================================================== */
+
+.bounty-hero {
+    background: linear-gradient(
+        135deg,
+        #f6d8fb,
+        #fff7e8
+    );
+
+    border-radius: 20px;
+    padding: 28px;
+
+    margin-bottom: 25px;
+}
+
+.bounty-hero-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.bounty-hero h2 {
+    font-size: 25px;
+    margin-bottom: 8px;
+}
+
+.bounty-hero p {
+    color: #725b75;
+    font-size: 13px;
+    line-height: 1.6;
+    max-width: 720px;
+}
+
+.bounty-badge {
+    background: var(--text);
+    color: white;
+    padding: 9px 14px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.bounty-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-top: 22px;
+}
+
+.bounty-stat {
+    background: rgba(255,255,255,0.72);
+    border: 1px solid var(--border);
+    border-radius: 13px;
+    padding: 15px;
+}
+
+.bounty-stat strong {
+    display: block;
+    font-size: 21px;
+}
+
+.bounty-stat span {
+    color: #806c83;
+    font-size: 11px;
+    margin-top: 5px;
+    display: block;
+}
+
+
+/* =====================================================
+   FILTER BAR
+===================================================== */
+
+.filter-card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+    margin-bottom: 25px;
+}
+
+.filter-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.search-wrapper {
+    flex: 1;
+    position: relative;
+}
+
+.search-wrapper span {
+    position: absolute;
+    left: 14px;
+    top: 12px;
+    color: #806c83;
+}
+
+.search-wrapper input {
+    width: 100%;
+    padding: 12px 14px 12px 38px;
+
+    border: 1px solid var(--border);
+    border-radius: 10px;
+
+    outline: none;
+    font-size: 13px;
+}
+
+.search-wrapper input:focus {
+    border-color: var(--primary-dark);
+}
+
+.filter-select {
+    padding: 12px 13px;
+
+    border: 1px solid var(--border);
+    border-radius: 10px;
+
+    background: white;
+    color: var(--text);
+
+    outline: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 12px;
+}
+
+.filter-select:focus {
+    border-color: var(--primary-dark);
+}
+
+
+/* =====================================================
+   SECTION TITLE
+===================================================== */
+
+.section-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 15px;
+}
+
+.section-title h2 {
+    font-size: 19px;
+}
+
+.section-title span {
+    font-size: 12px;
+    color: #806c83;
+}
+
+
+/* =====================================================
+   BOUNTY GRID
+===================================================== */
+
+.bounty-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+}
+
+
+/* =====================================================
+   BOUNTY CARD
+===================================================== */
+
+.bounty-card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 22px;
+
+    box-shadow: var(--shadow);
+
+    border: 1px solid transparent;
+
+    transition: 0.2s ease;
+}
+
+.bounty-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--primary);
+}
+
+.bounty-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.severity {
+    padding: 6px 10px;
+    border-radius: 20px;
+
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.severity.critical {
+    background: #ffe0e7;
+    color: #c21845;
+}
+
+.severity.high {
+    background: #fff0c9;
+    color: #a95c00;
+}
+
+.severity.medium {
+    background: #eadcf5;
+    color: #683276;
+}
+
+.severity.low {
+    background: #e0f0df;
+    color: #3f7541;
+}
+
+.reward {
+    color: #39834c;
+    font-weight: 800;
+    font-size: 19px;
+}
+
+.bounty-card h3 {
+    font-size: 17px;
+    line-height: 1.4;
+    margin-top: 16px;
+}
+
+.company {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    margin-top: 10px;
+
+    color: #806c83;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.company-icon {
+    width: 27px;
+    height: 27px;
+
+    border-radius: 8px;
+
+    background: #f8edf8;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.repo {
+    color: #9a879d;
+    font-weight: 400;
+}
+
+.description {
+    margin-top: 13px;
+
+    color: #806c83;
+    font-size: 13px;
+    line-height: 1.55;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+
+    margin-top: 15px;
+}
+
+.tag {
+    background: #f4e8f5;
+
+    padding: 6px 9px;
+
+    border-radius: 7px;
+
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.perk {
+    margin-top: 17px;
+
+    background: #fffaf0;
+
+    border: 1px solid #eadfce;
+
+    border-radius: 12px;
+
+    padding: 13px;
+}
+
+.perk strong {
+    display: block;
+
+    color: #966126;
+
+    font-size: 11px;
+
+    margin-bottom: 4px;
+}
+
+.perk span {
+    color: #806c83;
+    font-size: 11px;
+}
+
+.bounty-footer {
+    border-top: 1px solid var(--border);
+
+    margin-top: 18px;
+    padding-top: 15px;
+
+    display: flex;
+    gap: 10px;
+}
+
+.view-button {
+    flex: 1;
+
+    background: var(--text);
+    color: white;
+
+    border: none;
+    border-radius: 10px;
+
+    padding: 12px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+}
+
+.view-button:hover {
+    background: #4c1d55;
+}
+
+.save-button {
+    width: 44px;
+
+    background: white;
+
+    border: 1px solid var(--border);
+    border-radius: 10px;
+
+    color: var(--text);
+
+    font-size: 18px;
+
+    cursor: pointer;
+}
+
+.save-button:hover,
+.save-button.saved {
+    background: #f8e9fa;
+    color: #a444b0;
+}
+
+
+/* =====================================================
+   BOUNTY MODAL
+===================================================== */
+
+.modal {
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(53,20,61,0.45);
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    z-index: 200;
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-content {
+    background: white;
+
+    width: 100%;
+    max-width: 600px;
+
+    border-radius: 20px;
+
+    padding: 28px;
+
+    box-shadow: 0 20px 60px rgba(53,20,61,0.2);
+
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.modal-header h2 {
+    font-size: 21px;
+    line-height: 1.4;
+}
+
+.close-modal {
+    border: none;
+    background: transparent;
+
+    font-size: 24px;
+
+    color: #806c83;
+
+    cursor: pointer;
+}
+
+.modal-company {
+    margin-top: 10px;
+
+    color: #806c83;
+
+    font-size: 13px;
+}
+
+.modal-description {
+    margin-top: 20px;
+
+    color: #725b75;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+}
+
+.modal-info {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 12px;
+
+    margin-top: 20px;
+}
+
+.info-box {
+    background: #f8edf8;
+
+    border-radius: 12px;
+
+    padding: 13px;
+}
+
+.info-box small {
+    display: block;
+
+    color: #806c83;
+
+    font-size: 10px;
+}
+
+.info-box strong {
+    display: block;
+
+    margin-top: 5px;
+
+    font-size: 14px;
+}
+
+.modal-perk {
+    margin-top: 15px;
+
+    background: #fff7e8;
+
+    border: 1px solid #eadfce;
+
+    border-radius: 12px;
+
+    padding: 15px;
+}
+
+.modal-perk strong {
+    display: block;
+
+    color: #966126;
+
+    margin-bottom: 5px;
+}
+
+.modal-perk span {
+    color: #806c83;
+
+    font-size: 13px;
+}
+
+.submit-button {
+    width: 100%;
+
+    margin-top: 20px;
+
+    background: var(--primary-dark);
+    color: white;
+
+    border: none;
+    border-radius: 10px;
+
+    padding: 13px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.submit-button:hover {
+    background: #c966df;
+}
+
+
+/* =====================================================
+   EMPTY STATE
+===================================================== */
+
+.empty-state {
+    display: none;
+
+    background: white;
+
+    border-radius: 20px;
+
+    box-shadow: var(--shadow);
+
+    text-align: center;
+
+    padding: 55px 20px;
+}
+
+.empty-state div {
+    font-size: 38px;
+    margin-bottom: 10px;
+}
+
+.empty-state p {
+    color: #806c83;
+    margin-top: 6px;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width: 1100px) {
+
+    .dashboard-grid {
+        grid-template-columns: 220px 1fr;
+    }
+
+    .bounty-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .bounty-stats {
+        grid-template-columns: repeat(2,1fr);
+    }
+
+}
+
+@media(max-width: 800px) {
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        position: static;
+    }
+
+    .filter-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .bounty-hero-top {
+        flex-direction: column;
+    }
+
+    .bounty-badge {
+        align-self: flex-start;
+    }
+
+}
+
+@media(max-width: 650px) {
+
+    .navbar {
+        padding: 0 15px;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .container {
+        padding: 15px;
+    }
+
+    .bounty-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .modal-info {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        Skill<span>Stupor</span>
+    </div>
+
+
+    <div class="nav-links">
+
+        <a href="#dashboard">
+            Dashboard
+        </a>
+
+        <a href="#skills">
+            Skills
+        </a>
+
+        <a href="#goals">
+            Goals
+        </a>
+
+        <a href="#roadmap">
+            Roadmap
+        </a>
+
+    </div>
+
+
+    <button
+        class="ct-button"
+        onclick="careerTwin()">
+
+        Career Twin →
+
+    </button>
+
+</nav>
+
+
+
+<!-- =====================================================
+     DASHBOARD
+===================================================== -->
+
+<div class="container" id="dashboard">
+
+<div class="dashboard-grid">
+
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<aside class="sidebar">
+
+
+    <div class="profile">
+
+        <img
+            id="profileImage"
+            src="https://github.com/identicons/alexsharma.png"
+            alt="Alex Sharma">
+
+        <h2>
+            Alex Sharma
+        </h2>
+
+        <p>
+            CSE Student
+        </p>
+
+        <div class="github-handle">
+
+            🐙
+            <span>
+                @alexsharma
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="sidebar-menu">
+
+
+        <button
+            onclick="dashboardHome()">
+
+            🏠 Dashboard
+
+        </button>
+
+
+        <button
+            onclick="showMessage('GitHub section')">
+
+            🐙 GitHub
+
+        </button>
+
+
+        <button
+            onclick="showMessage('Skills section')">
+
+            🧠 Skills
+
+        </button>
+
+
+        <button
+            onclick="showMessage('Career Goals section')">
+
+            🎯 Career Goals
+
+        </button>
+
+
+        <button
+            onclick="showMessage('Skill Roadmap section')">
+
+            🗺️ Skill Roadmap
+
+        </button>
+
+
+        <button
+            class="active"
+            onclick="scrollToBounties()">
+
+            🐞 Bug Bounties
+
+        </button>
+
+
+    </div>
+
+</aside>
+
+
+
+<!-- =====================================================
+     MAIN CONTENT
+===================================================== -->
+
+<main>
+
+
+    <div class="welcome">
+
+        <h1>
+            Bug Bounties 🐞
+        </h1>
+
+        <p>
+            Find real-world problems, prove your skills, and earn rewards.
+        </p>
+
+    </div>
+
+
+
+    <!-- =================================================
+         BOUNTY HERO
+    ================================================= -->
+
+    <section class="bounty-hero">
+
+
+        <div class="bounty-hero-top">
+
+
+            <div>
+
+                <h2>
+                    Find your next challenge.
+                </h2>
+
+                <p>
+                    Companies are opening technical challenges to students
+                    across software development, cybersecurity, cloud,
+                    data, AI, systems and more. Pick a bounty that matches
+                    your skills and submit your solution.
+                </p>
+
+            </div>
+
+
+            <div class="bounty-badge">
+
+                🟢 60 OPEN
+
+            </div>
+
+
+        </div>
+
+
+        <div class="bounty-stats">
+
+
+            <div class="bounty-stat">
+
+                <strong>
+                    60
+                </strong>
+
+                <span>
+                    Open Bounties
+                </span>
+
+            </div>
+
+
+            <div class="bounty-stat">
+
+                <strong>
+                    ₹42.8K+
+                </strong>
+
+                <span>
+                    Total Rewards
+                </span>
+
+            </div>
+
+
+            <div class="bounty-stat">
+
+                <strong>
+                    28
+                </strong>
+
+                <span>
+                    Companies
+                </span>
+
+            </div>
+
+
+            <div class="bounty-stat">
+
+                <strong>
+                    17
+                </strong>
+
+                <span>
+                    Skills Covered
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =================================================
+         FILTERS
+    ================================================= -->
+
+    <section class="filter-card">
+
+
+        <div class="filter-row">
+
+
+            <div class="search-wrapper">
+
+                <span>
+                    🔎
+                </span>
+
+                <input
+                    id="searchInput"
+                    type="text"
+                    placeholder="Search bounties, companies, repositories or skills..."
+                    oninput="applyFilters()">
+
+            </div>
+
+
+            <select
+                id="severityFilter"
+                class="filter-select"
+                onchange="applyFilters()">
+
+                <option value="all">
+                    All Severity
+                </option>
+
+                <option value="critical">
+                    Critical
+                </option>
+
+                <option value="high">
+                    High
+                </option>
+
+                <option value="medium">
+                    Medium
+                </option>
+
+                <option value="low">
+                    Low
+                </option>
+
+            </select>
+
+
+            <select
+                id="skillFilter"
+                class="filter-select"
+                onchange="applyFilters()">
+
+                <option value="all">
+                    All Skills
+                </option>
+
+                <option value="C++">
+                    C++
+                </option>
+
+                <option value="Python">
+                    Python
+                </option>
+
+                <option value="JavaScript">
+                    JavaScript
+                </option>
+
+                <option value="React">
+                    React
+                </option>
+
+                <option value="Java">
+                    Java
+                </option>
+
+                <option value="Go">
+                    Go
+                </option>
+
+                <option value="SQL">
+                    SQL
+                </option>
+
+                <option value="Security">
+                    Security
+                </option>
+
+            </select>
+
+
+            <select
+                id="sortFilter"
+                class="filter-select"
+                onchange="applyFilters()">
+
+                <option value="newest">
+                    Newest
+                </option>
+
+                <option value="highest">
+                    Highest Reward
+                </option>
+
+                <option value="lowest">
+                    Lowest Reward
+                </option>
+
+            </select>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         BOUNTIES
+    ================================================= -->
+
+    <div class="section-title">
+
+        <div>
+
+            <h2>
+                Open Bounties
+            </h2>
+
+        </div>
+
+        <span id="resultCount">
+            60 bounties
+        </span>
+
+    </div>
+
+
+    <div
+        class="bounty-grid"
+        id="bountyGrid">
+
+    </div>
+
+
+    <div
+        class="empty-state"
+        id="emptyState">
+
+        <div>
+            🔎
+        </div>
+
+        <h3>
+            No bounties found
+        </h3>
+
+        <p>
+            Try changing your search or filters.
+        </p>
+
+    </div>
+
+
+</main>
+
+
+</div>
+
+</div>
+
+
+
+<!-- =====================================================
+     MODAL
+===================================================== -->
+
+<div
+    class="modal"
+    id="bountyModal">
+
+
+    <div class="modal-content">
+
+
+        <div class="modal-header">
+
+            <h2 id="modalTitle">
+                Bounty
+            </h2>
+
+            <button
+                class="close-modal"
+                onclick="closeModal()">
+
+                ×
+
+            </button>
+
+        </div>
+
+
+        <div
+            class="modal-company"
+            id="modalCompany">
+
+        </div>
+
+
+        <div
+            class="modal-description"
+            id="modalDescription">
+
+        </div>
+
+
+        <div class="modal-info">
+
+
+            <div class="info-box">
+
+                <small>
+                    Severity
+                </small>
+
+                <strong id="modalSeverity">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div class="info-box">
+
+                <small>
+                    Reward
+                </small>
+
+                <strong id="modalReward">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div class="info-box">
+
+                <small>
+                    Repository
+                </small>
+
+                <strong id="modalRepo">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div class="info-box">
+
+                <small>
+                    Skills
+                </small>
+
+                <strong id="modalSkills">
+                    -
+                </strong>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="modal-perk">
+
+            <strong>
+                🎁 Student Perk
+            </strong>
+
+            <span id="modalPerk">
+            </span>
+
+        </div>
+
+
+        <button
+            class="submit-button"
+            onclick="submitBounty()">
+
+            Submit Solution →
+
+        </button>
+
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+
+/* =====================================================
+   BOUNTY DATA
+===================================================== */
+
+const bounties = [
+
+{
+    severity:"critical",
+    reward:1800,
+    company:"NovaStack Labs",
+    repo:"auth-gateway",
+    title:"Fix authentication bypass in API gateway",
+    description:"Investigate an authorization edge case that may allow requests to skip a permission validation layer.",
+    skills:["Python","Security","API"],
+    perk:"Security Engineer Review"
+},
+
+{
+    severity:"critical",
+    reward:1650,
+    company:"CloudForge",
+    repo:"identity-service",
+    title:"Resolve token validation failure",
+    description:"Identify inconsistent token validation across distributed identity service instances.",
+    skills:["Go","Security","Backend"],
+    perk:"Fast-Track Technical Review"
+},
+
+{
+    severity:"critical",
+    reward:1500,
+    company:"DataNest",
+    repo:"query-engine",
+    title:"Prevent privilege escalation in query engine",
+    description:"Trace a permission handling issue affecting role-based access to analytical queries.",
+    skills:["Rust","SQL","Security"],
+    perk:"Senior Engineer Feedback"
+},
+
+{
+    severity:"critical",
+    reward:1450,
+    company:"ByteBridge",
+    repo:"payment-core",
+    title:"Investigate duplicate transaction processing",
+    description:"Find the concurrency issue causing duplicate transaction events under high request volume.",
+    skills:["Java","Kafka","Backend"],
+    perk:"Backend Interview Fast Track"
+},
+
+{
+    severity:"critical",
+    reward:1350,
+    company:"Orbit Systems",
+    repo:"session-manager",
+    title:"Repair cross-service session validation",
+    description:"Analyze inconsistent session state when users move between regional service clusters.",
+    skills:["Node.js","Redis","Cloud"],
+    perk:"Cloud Engineering Review"
+},
+
+{
+    severity:"critical",
+    reward:1250,
+    company:"PixelGrid",
+    repo:"media-api",
+    title:"Fix unsafe file processing pipeline",
+    description:"Identify and patch an unexpected file-processing behavior in the media upload service.",
+    skills:["Node.js","Security","API"],
+    perk:"Portfolio Highlight"
+},
+
+{
+    severity:"high",
+    reward:1200,
+    company:"TechNova",
+    repo:"notification-service",
+    title:"Resolve notification delivery race condition",
+    description:"Fix an event ordering problem that causes notifications to arrive multiple times.",
+    skills:["Java","Kafka","Redis"],
+    perk:"Fast-Track Final Interview"
+},
+
+{
+    severity:"high",
+    reward:1100,
+    company:"CodeOrbit",
+    repo:"compiler-tools",
+    title:"Optimize compiler memory usage",
+    description:"Investigate excessive memory consumption during large source-file compilation.",
+    skills:["C++","LLVM","Systems"],
+    perk:"Systems Engineer Review"
+},
+
+{
+    severity:"high",
+    reward:1050,
+    company:"FinStack",
+    repo:"ledger-api",
+    title:"Correct ledger consistency issue",
+    description:"Trace inconsistent account balances generated during concurrent ledger updates.",
+    skills:["Java","SQL","Backend"],
+    perk:"Backend Interview Opportunity"
+},
+
+{
+    severity:"high",
+    reward:1000,
+    company:"CloudMint",
+    repo:"storage-layer",
+    title:"Fix object storage retry loop",
+    description:"Repair an exponential retry issue that can cause unnecessary resource consumption.",
+    skills:["Go","AWS","Cloud"],
+    perk:"Cloud Certification Voucher"
+},
+
+{
+    severity:"high",
+    reward:950,
+    company:"DevPulse",
+    repo:"analytics-api",
+    title:"Resolve incorrect analytics aggregation",
+    description:"Find why certain event batches produce incorrect weekly analytics.",
+    skills:["Python","SQL","Analytics"],
+    perk:"Data Engineering Mentorship"
+},
+
+{
+    severity:"high",
+    reward:900,
+    company:"SecureMesh",
+    repo:"access-control",
+    title:"Patch role inheritance bug",
+    description:"Investigate unexpected inherited permissions between nested organization roles.",
+    skills:["Python","Security","RBAC"],
+    perk:"Security Mentor Session"
+},
+
+{
+    severity:"high",
+    reward:875,
+    company:"AppCraft",
+    repo:"mobile-api",
+    title:"Fix inconsistent API response caching",
+    description:"Identify stale response behavior affecting mobile application clients.",
+    skills:["Node.js","API","Redis"],
+    perk:"Frontend + Backend Review"
+},
+
+{
+    severity:"high",
+    reward:850,
+    company:"DataWave",
+    repo:"pipeline-engine",
+    title:"Optimize batch processing bottleneck",
+    description:"Improve throughput when processing large datasets through the ingestion pipeline.",
+    skills:["Python","SQL","ETL"],
+    perk:"Data Engineering Review"
+},
+
+{
+    severity:"high",
+    reward:825,
+    company:"StackWorks",
+    repo:"queue-manager",
+    title:"Fix delayed job processing",
+    description:"Investigate jobs that remain queued despite workers being available.",
+    skills:["Go","Backend","Queues"],
+    perk:"Fast-Track Screening"
+},
+
+{
+    severity:"high",
+    reward:800,
+    company:"BrightCode",
+    repo:"web-platform",
+    title:"Resolve session timeout regression",
+    description:"Track down a regression causing unexpected session expiration for active users.",
+    skills:["React","JavaScript","Security"],
+    perk:"Frontend Engineer Feedback"
+},
+
+{
+    severity:"high",
+    reward:775,
+    company:"InfraLabs",
+    repo:"deployment-agent",
+    title:"Repair failed deployment rollback",
+    description:"Fix an issue preventing reliable rollback after unsuccessful deployments.",
+    skills:["Docker","Cloud","DevOps"],
+    perk:"DevOps Mentor Session"
+},
+
+{
+    severity:"high",
+    reward:750,
+    company:"AlgoWorks",
+    repo:"search-engine",
+    title:"Improve search ranking consistency",
+    description:"Investigate inconsistent ranking results between identical search queries.",
+    skills:["Python","Algorithms","Search"],
+    perk:"Algorithm Review"
+},
+
+{
+    severity:"high",
+    reward:725,
+    company:"WebNest",
+    repo:"frontend-core",
+    title:"Fix state synchronization bug",
+    description:"Resolve stale UI state appearing after rapid user interactions.",
+    skills:["React","JavaScript","Frontend"],
+    perk:"Frontend Portfolio Review"
+},
+
+{
+    severity:"high",
+    reward:700,
+    company:"QuantumByte",
+    repo:"compute-service",
+    title:"Fix resource allocation imbalance",
+    description:"Identify why compute jobs are unevenly distributed between worker nodes.",
+    skills:["Python","Cloud","Distributed"],
+    perk:"Cloud Engineering Review"
+},
+
+{
+    severity:"medium",
+    reward:650,
+    company:"TechNova",
+    repo:"branch-sync-service",
+    title:"Address branch synchronization race condition",
+    description:"Fix inconsistent branch state during simultaneous synchronization requests.",
+    skills:["Go","Distributed","Backend"],
+    perk:"Guaranteed Technical Interview"
+},
+
+{
+    severity:"medium",
+    reward:625,
+    company:"PixelForge",
+    repo:"image-engine",
+    title:"Fix image transformation memory spike",
+    description:"Reduce temporary memory usage when processing high-resolution images.",
+    skills:["C++","Systems","Memory"],
+    perk:"C++ Mentor Session"
+},
+
+{
+    severity:"medium",
+    reward:600,
+    company:"LearnLoop",
+    repo:"course-api",
+    title:"Correct course progress calculation",
+    description:"Resolve incorrect progress percentages when lessons are completed out of order.",
+    skills:["Python","JavaScript","API"],
+    perk:"EdTech Internship Review"
+},
+
+{
+    severity:"medium",
+    reward:575,
+    company:"FinStack",
+    repo:"reporting-ui",
+    title:"Fix dashboard chart rendering",
+    description:"Repair missing data points in monthly financial reporting charts.",
+    skills:["React","JavaScript","UI"],
+    perk:"UI Engineering Feedback"
+},
+
+{
+    severity:"medium",
+    reward:550,
+    company:"CloudForge",
+    repo:"log-service",
+    title:"Improve log filtering performance",
+    description:"Optimize filtering for large log datasets in the developer console.",
+    skills:["Go","Backend","Performance"],
+    perk:"Backend Mentorship"
+},
+
+{
+    severity:"medium",
+    reward:525,
+    company:"DevPulse",
+    repo:"profile-service",
+    title:"Resolve duplicate profile records",
+    description:"Identify why repeated synchronization creates duplicate user profiles.",
+    skills:["Node.js","SQL","API"],
+    perk:"Full-Stack Resume Review"
+},
+
+{
+    severity:"medium",
+    reward:500,
+    company:"CodeOrbit",
+    repo:"terminal-ui",
+    title:"Fix terminal resize rendering issue",
+    description:"Correct layout rendering when the terminal window changes dimensions.",
+    skills:["C++","Linux","UI"],
+    perk:"Open Source Contributor Badge"
+},
+
+{
+    severity:"medium",
+    reward:490,
+    company:"DataNest",
+    repo:"etl-worker",
+    title:"Handle malformed CSV batches",
+    description:"Improve error handling when ingestion workers receive malformed CSV files.",
+    skills:["Python","Data","ETL"],
+    perk:"Data Team Review"
+},
+
+{
+    severity:"medium",
+    reward:475,
+    company:"AppCraft",
+    repo:"notification-ui",
+    title:"Fix unread notification counter",
+    description:"Resolve incorrect unread counts after notifications are dismissed.",
+    skills:["React","JavaScript","Frontend"],
+    perk:"Frontend Portfolio Review"
+},
+
+{
+    severity:"medium",
+    reward:460,
+    company:"StackWorks",
+    repo:"api-gateway",
+    title:"Improve request validation errors",
+    description:"Make malformed request handling consistent across API endpoints.",
+    skills:["Node.js","API","JavaScript"],
+    perk:"Backend Skill Assessment"
+},
+
+{
+    severity:"medium",
+    reward:450,
+    company:"BrightCode",
+    repo:"dashboard",
+    title:"Fix responsive dashboard layout",
+    description:"Repair overlapping dashboard components on tablet-sized screens.",
+    skills:["HTML","CSS","JavaScript"],
+    perk:"UI/UX Mentor Review"
+},
+
+{
+    severity:"medium",
+    reward:440,
+    company:"SecureMesh",
+    repo:"audit-service",
+    title:"Correct missing audit events",
+    description:"Find why selected administrative actions are absent from audit logs.",
+    skills:["Java","Security","Backend"],
+    perk:"Cybersecurity Mentor Session"
+},
+
+{
+    severity:"medium",
+    reward:425,
+    company:"Orbit Systems",
+    repo:"scheduler",
+    title:"Fix recurring job scheduling drift",
+    description:"Resolve timing drift affecting recurring scheduled jobs.",
+    skills:["Python","Backend","Automation"],
+    perk:"Automation Team Review"
+},
+
+{
+    severity:"medium",
+    reward:410,
+    company:"WebNest",
+    repo:"form-engine",
+    title:"Fix dynamic form validation",
+    description:"Resolve validation failures when fields are added dynamically.",
+    skills:["React","JavaScript","TypeScript"],
+    perk:"Frontend Interview Review"
+},
+
+{
+    severity:"medium",
+    reward:400,
+    company:"AlgoWorks",
+    repo:"recommendation-api",
+    title:"Improve recommendation filtering",
+    description:"Fix duplicate recommendations appearing for returning users.",
+    skills:["Python","Algorithms","API"],
+    perk:"ML Team Feedback"
+},
+
+{
+    severity:"medium",
+    reward:390,
+    company:"NovaStack Labs",
+    repo:"config-service",
+    title:"Resolve stale configuration values",
+    description:"Fix configuration caching that prevents updated settings from propagating.",
+    skills:["Go","Cloud","Redis"],
+    perk:"Cloud Engineering Review"
+},
+
+{
+    severity:"medium",
+    reward:375,
+    company:"QuantumByte",
+    repo:"job-monitor",
+    title:"Fix incorrect worker status",
+    description:"Correct worker status updates after jobs finish unexpectedly.",
+    skills:["Python","Monitoring","API"],
+    perk:"Engineering Mentor Call"
+},
+
+{
+    severity:"medium",
+    reward:350,
+    company:"LearnLoop",
+    repo:"quiz-engine",
+    title:"Correct quiz scoring edge case",
+    description:"Fix scoring behavior for partially completed multi-answer questions.",
+    skills:["JavaScript","Logic","Testing"],
+    perk:"EdTech Portfolio Review"
+},
+
+{
+    severity:"medium",
+    reward:325,
+    company:"PixelGrid",
+    repo:"asset-manager",
+    title:"Fix duplicate asset uploads",
+    description:"Prevent repeated uploads when users rapidly submit the same asset.",
+    skills:["React","Node.js","Storage"],
+    perk:"Full-Stack Feedback"
+},
+
+{
+    severity:"medium",
+    reward:300,
+    company:"InfraLabs",
+    repo:"metrics-agent",
+    title:"Correct CPU metric reporting",
+    description:"Resolve inaccurate CPU measurements on selected Linux environments.",
+    skills:["Python","Linux","Monitoring"],
+    perk:"DevOps Mentor Session"
+},
+
+{
+    severity:"medium",
+    reward:285,
+    company:"DataWave",
+    repo:"dashboard-api",
+    title:"Fix timezone conversion issue",
+    description:"Correct date and time rendering for users in different regions.",
+    skills:["Python","API","JavaScript"],
+    perk:"Backend Code Review"
+},
+
+{
+    severity:"medium",
+    reward:275,
+    company:"TechNova",
+    repo:"employee-dashboard",
+    title:"Repair incorrect team statistics",
+    description:"Fix incorrect aggregation when teams contain recently transferred members.",
+    skills:["JavaScript","SQL","Analytics"],
+    perk:"Product Engineering Review"
+},
+
+{
+    severity:"medium",
+    reward:260,
+    company:"CodeOrbit",
+    repo:"package-manager",
+    title:"Fix dependency resolution warning",
+    description:"Improve dependency conflict reporting during package installation.",
+    skills:["C++","Systems","CLI"],
+    perk:"Open Source Recognition"
+},
+
+{
+    severity:"low",
+    reward:250,
+    company:"BrightCode",
+    repo:"landing-page",
+    title:"Fix mobile navigation overlap",
+    description:"Resolve navigation elements overlapping on smaller mobile screens.",
+    skills:["HTML","CSS","UI"],
+    perk:"UI Portfolio Review"
+},
+
+{
+    severity:"low",
+    reward:240,
+    company:"WebNest",
+    repo:"components",
+    title:"Fix button loading state",
+    description:"Correct inconsistent loading indicators after form submission.",
+    skills:["React","JavaScript","Frontend"],
+    perk:"Frontend Mentor Feedback"
+},
+
+{
+    severity:"low",
+    reward:225,
+    company:"LearnLoop",
+    repo:"student-portal",
+    title:"Correct missing course badge",
+    description:"Fix achievement badges that fail to appear after course completion.",
+    skills:["JavaScript","React","UI"],
+    perk:"Student Product Review"
+},
+
+{
+    severity:"low",
+    reward:210,
+    company:"DevPulse",
+    repo:"developer-tools",
+    title:"Fix incorrect command output",
+    description:"Correct formatting when command results contain empty values.",
+    skills:["Python","CLI","Testing"],
+    perk:"Developer Tools Review"
+},
+
+{
+    severity:"low",
+    reward:200,
+    company:"AppCraft",
+    repo:"settings-ui",
+    title:"Repair settings toggle state",
+    description:"Fix toggle controls that visually reset after navigating between settings.",
+    skills:["React","JavaScript","UI"],
+    perk:"Frontend Skill Review"
+},
+
+{
+    severity:"low",
+    reward:190,
+    company:"DataNest",
+    repo:"csv-parser",
+    title:"Handle empty CSV columns",
+    description:"Improve parser behavior when optional columns contain empty values.",
+    skills:["Python","Data","Testing"],
+    perk:"Data Team Feedback"
+},
+
+{
+    severity:"low",
+    reward:185,
+    company:"StackWorks",
+    repo:"documentation",
+    title:"Fix broken API examples",
+    description:"Update outdated request examples and correct inaccurate response samples.",
+    skills:["API","JavaScript","Docs"],
+    perk:"Open Source Contributor Badge"
+},
+
+{
+    severity:"low",
+    reward:175,
+    company:"PixelForge",
+    repo:"design-system",
+    title:"Correct spacing token mismatch",
+    description:"Fix inconsistent spacing values across reusable UI components.",
+    skills:["CSS","Frontend","Design"],
+    perk:"Design System Review"
+},
+
+{
+    severity:"low",
+    reward:165,
+    company:"CloudMint",
+    repo:"status-page",
+    title:"Fix service status refresh",
+    description:"Resolve delayed status updates on the infrastructure status dashboard.",
+    skills:["JavaScript","API","Cloud"],
+    perk:"Cloud Team Feedback"
+},
+
+{
+    severity:"low",
+    reward:155,
+    company:"Orbit Systems",
+    repo:"internal-tools",
+    title:"Fix table sorting behavior",
+    description:"Correct ascending and descending sorting for numeric table values.",
+    skills:["JavaScript","UI","Testing"],
+    perk:"Product Engineering Review"
+},
+
+{
+    severity:"low",
+    reward:150,
+    company:"NovaStack Labs",
+    repo:"cli-tools",
+    title:"Improve CLI error messaging",
+    description:"Make command-line errors clearer when required arguments are missing.",
+    skills:["Python","CLI","UX"],
+    perk:"Developer Experience Review"
+},
+
+{
+    severity:"low",
+    reward:145,
+    company:"SecureMesh",
+    repo:"password-ui",
+    title:"Fix password strength indicator",
+    description:"Correct the visual strength indicator for several valid password patterns.",
+    skills:["JavaScript","Security","UI"],
+    perk:"Security Mentor Feedback"
+},
+
+{
+    severity:"low",
+    reward:140,
+    company:"AlgoWorks",
+    repo:"sorting-utils",
+    title:"Fix edge case in sorting helper",
+    description:"Handle duplicate values correctly in the shared sorting utility.",
+    skills:["C++","Algorithms","Testing"],
+    perk:"DSA Mentor Review"
+},
+
+{
+    severity:"low",
+    reward:135,
+    company:"FinStack",
+    repo:"invoice-ui",
+    title:"Fix invoice total rounding",
+    description:"Correct rounding behavior for invoices containing multiple decimal values.",
+    skills:["JavaScript","Math","Frontend"],
+    perk:"FinTech Engineering Review"
+},
+
+{
+    severity:"low",
+    reward:130,
+    company:"QuantumByte",
+    repo:"docs-site",
+    title:"Fix documentation navigation",
+    description:"Repair navigation between several documentation sections.",
+    skills:["HTML","CSS","Docs"],
+    perk:"Open Source Recognition"
+},
+
+{
+    severity:"low",
+    reward:125,
+    company:"TechNova",
+    repo:"career-portal",
+    title:"Fix filter reset behavior",
+    description:"Correct filters that remain active after the reset action is selected.",
+    skills:["React","JavaScript","UI"],
+    perk:"Product Team Feedback"
+},
+
+{
+    severity:"low",
+    reward:120,
+    company:"CodeOrbit",
+    repo:"test-runner",
+    title:"Fix failed test summary",
+    description:"Correct test summary counts when multiple test suites are executed.",
+    skills:["C++","Testing","CLI"],
+    perk:"Systems Team Review"
+},
+
+{
+    severity:"low",
+    reward:115,
+    company:"DataWave",
+    repo:"export-service",
+    title:"Fix CSV export headers",
+    description:"Correct missing column headers in selected exported reports.",
+    skills:["Python","Data","Backend"],
+    perk:"Data Engineering Feedback"
+},
+
+{
+    severity:"low",
+    reward:110,
+    company:"LearnLoop",
+    repo:"dashboard-ui",
+    title:"Fix card alignment issue",
+    description:"Improve card alignment when titles contain different amounts of text.",
+    skills:["HTML","CSS","UI"],
+    perk:"UI Mentor Session"
+},
+
+{
+    severity:"low",
+    reward:105,
+    company:"AppCraft",
+    repo:"profile-ui",
+    title:"Fix avatar fallback",
+    description:"Correct fallback avatar behavior when profile images cannot be loaded.",
+    skills:["React","Frontend","JavaScript"],
+    perk:"Frontend Review"
+},
+
+{
+    severity:"low",
+    reward:100,
+    company:"PixelGrid",
+    repo:"gallery",
+    title:"Fix gallery keyboard navigation",
+    description:"Improve keyboard navigation between images in the gallery component.",
+    skills:["JavaScript","UI","Accessibility"],
+    perk:"Accessibility Review"
+},
+
+{
+    severity:"low",
+    reward:95,
+    company:"BrightCode",
+    repo:"footer",
+    title:"Fix footer responsive spacing",
+    description:"Correct spacing and alignment in the responsive footer layout.",
+    skills:["HTML","CSS","Responsive"],
+    perk:"Frontend Portfolio Badge"
+},
+
+{
+    severity:"low",
+    reward:90,
+    company:"WebNest",
+    repo:"search-ui",
+    title:"Fix empty search state",
+    description:"Improve the UI shown when a search returns no matching results.",
+    skills:["React","UI","UX"],
+    perk:"UX Team Feedback"
+},
+
+{
+    severity:"low",
+    reward:85,
+    company:"DevPulse",
+    repo:"notifications",
+    title:"Fix notification icon alignment",
+    description:"Correct icon alignment across different notification states.",
+    skills:["CSS","HTML","Frontend"],
+    perk:"Design Review"
+},
+
+{
+    severity:"low",
+    reward:80,
+    company:"InfraLabs",
+    repo:"admin-ui",
+    title:"Fix admin table pagination",
+    description:"Correct pagination when filtering large administrator tables.",
+    skills:["JavaScript","UI","Testing"],
+    perk:"DevOps Product Review"
+},
+
+{
+    severity:"low",
+    reward:75,
+    company:"CloudForge",
+    repo:"docs",
+    title:"Correct outdated configuration example",
+    description:"Update a configuration example that no longer matches the current API.",
+    skills:["Docs","Cloud","API"],
+    perk:"Open Source Badge"
+},
+
+{
+    severity:"low",
+    reward:70,
+    company:"StackWorks",
+    repo:"starter-kit",
+    title:"Fix starter project setup warning",
+    description:"Resolve a warning appearing during initial project setup.",
+    skills:["JavaScript","CLI","Developer Tools"],
+    perk:"Developer Experience Review"
+},
+
+{
+    severity:"low",
+    reward:65,
+    company:"NovaStack Labs",
+    repo:"website",
+    title:"Fix mobile menu animation",
+    description:"Improve the mobile navigation animation when opening and closing the menu.",
+    skills:["CSS","JavaScript","UI"],
+    perk:"Frontend Feedback"
+},
+
+{
+    severity:"low",
+    reward:60,
+    company:"SecureMesh",
+    repo:"security-docs",
+    title:"Improve security documentation clarity",
+    description:"Identify unclear technical documentation and submit an improved implementation example.",
+    skills:["Security","Docs","Technical Writing"],
+    perk:"Security Team Recognition"
+}
+
+];
+
+
+/* =====================================================
+   RENDER BOUNTIES
+===================================================== */
+
+function renderBounties(list) {
+
+    const grid =
+        document.getElementById("bountyGrid");
+
+    const empty =
+        document.getElementById("emptyState");
+
+    const resultCount =
+        document.getElementById("resultCount");
+
+
+    grid.innerHTML = "";
+
+
+    resultCount.innerText =
+        `${list.length} ${list.length === 1 ? "bounty" : "bounties"}`;
+
+
+    if (list.length === 0) {
+
+        empty.style.display = "block";
+
+        return;
+
+    }
+
+
+    empty.style.display = "none";
+
+
+    list.forEach((bounty,index) => {
+
+
+        const card =
+            document.createElement("div");
+
+
+        card.className =
+            "bounty-card";
+
+
+        card.innerHTML = `
+
+            <div class="bounty-top">
+
+                <span class="severity ${bounty.severity}">
+                    ${bounty.severity.toUpperCase()}
+                </span>
+
+                <span class="reward">
+                    ₹${bounty.reward.toLocaleString("en-IN")}
+                </span>
+
+            </div>
+
+
+            <h3>
+                ${bounty.title}
+            </h3>
+
+
+            <div class="company">
+
+                <div class="company-icon">
+                    🏢
+                </div>
+
+                <span>
+                    ${bounty.company}
+
+                    <span class="repo">
+                        · ${bounty.repo}
+                    </span>
+                </span>
+
+            </div>
+
+
+            <div class="description">
+                ${bounty.description}
+            </div>
+
+
+            <div class="tags">
+
+                ${bounty.skills.map(skill => `
+
+                    <span class="tag">
+                        ${skill}
+                    </span>
+
+                `).join("")}
+
+            </div>
+
+
+            <div class="perk">
+
+                <strong>
+                    🎁 Student Perk
+                </strong>
+
+                <span>
+                    ${bounty.perk}
+                </span>
+
+            </div>
+
+
+            <div class="bounty-footer">
+
+                <button
+                    class="view-button"
+                    onclick="viewBounty(${index})">
+
+                    View Bounty →
+
+                </button>
+
+
+                <button
+                    class="save-button"
+                    onclick="saveBounty(this)">
+
+                    ♡
+
+                </button>
+
+            </div>
+
+        `;
+
+
+        grid.appendChild(card);
+
+    });
+
+}
+
+
+/* =====================================================
+   FILTERS
+===================================================== */
+
+function applyFilters() {
+
+
+    const search =
+        document.getElementById("searchInput")
+        .value
+        .toLowerCase();
+
+
+    const severity =
+        document.getElementById("severityFilter")
+        .value;
+
+
+    const skill =
+        document.getElementById("skillFilter")
+        .value;
+
+
+    const sort =
+        document.getElementById("sortFilter")
+        .value;
+
+
+    let filtered =
+        bounties.filter(bounty => {
+
+
+            const searchable = `
+
+                ${bounty.title}
+                ${bounty.company}
+                ${bounty.repo}
+                ${bounty.description}
+                ${bounty.skills.join(" ")}
+
+            `.toLowerCase();
+
+
+            const searchMatch =
+                searchable.includes(search);
+
+
+            const severityMatch =
+                severity === "all" ||
+                bounty.severity === severity;
+
+
+            const skillMatch =
+                skill === "all" ||
+                bounty.skills.includes(skill);
+
+
+            return (
+                searchMatch &&
+                severityMatch &&
+                skillMatch
+            );
+
+        });
+
+
+    if (sort === "highest") {
+
+        filtered.sort(
+            (a,b) => b.reward - a.reward
+        );
+
+    }
+
+
+    if (sort === "lowest") {
+
+        filtered.sort(
+            (a,b) => a.reward - b.reward
+        );
+
+    }
+
+
+    renderBounties(filtered);
+
+}
+
+
+/* =====================================================
+   SAVE BOUNTY
+===================================================== */
+
+function saveBounty(button) {
+
+    button.classList.toggle("saved");
+
+
+    if (
+        button.classList.contains("saved")
+    ) {
+
+        button.innerText = "♥";
+
+    }
+
+    else {
+
+        button.innerText = "♡";
+
+    }
+
+}
+
+
+/* =====================================================
+   VIEW BOUNTY
+===================================================== */
+
+function viewBounty(index) {
+
+    const bounty =
+        bounties[index];
+
+
+    document.getElementById(
+        "modalTitle"
+    ).innerText =
+        bounty.title;
+
+
+    document.getElementById(
+        "modalCompany"
+    ).innerText =
+        `${bounty.company} · ${bounty.repo}`;
+
+
+    document.getElementById(
+        "modalDescription"
+    ).innerText =
+        bounty.description;
+
+
+    document.getElementById(
+        "modalSeverity"
+    ).innerText =
+        bounty.severity.toUpperCase();
+
+
+    document.getElementById(
+        "modalReward"
+    ).innerText =
+        "₹" +
+        bounty.reward.toLocaleString("en-IN");
+
+
+    document.getElementById(
+        "modalRepo"
+    ).innerText =
+        bounty.repo;
+
+
+    document.getElementById(
+        "modalSkills"
+    ).innerText =
+        bounty.skills.join(", ");
+
+
+    document.getElementById(
+        "modalPerk"
+    ).innerText =
+        bounty.perk;
+
+
+    document.getElementById(
+        "bountyModal"
+    ).classList.add("show");
+
+}
+
+
+/* =====================================================
+   CLOSE MODAL
+===================================================== */
+
+function closeModal() {
+
+    document.getElementById(
+        "bountyModal"
+    ).classList.remove("show");
+
+}
+
+
+document.getElementById(
+    "bountyModal"
+).addEventListener(
+    "click",
+    function(event) {
+
+        if (
+            event.target === this
+        ) {
+
+            closeModal();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   SUBMIT
+===================================================== */
+
+function submitBounty() {
+
+    alert(
+        "🐞 Bounty submission portal ready!\n\nConnect this button to your submission page."
+    );
+
+}
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+function scrollToBounties() {
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+}
+
+
+function dashboardHome() {
+
+    alert(
+        "Dashboard navigation ready! Connect this button to your student dashboard."
+    );
+
+}
+
+
+function showMessage(section) {
+
+    alert(
+        section +
+        " navigation ready!"
+    );
+
+}
+
+
+function careerTwin() {
+
+    alert(
+        "Career Twin connection ready!"
+    );
+
+}
+
+renderBounties(bounties);
+
+</script>
+
+
+</body>
+</html>
