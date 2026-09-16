@@ -1,4 +1,4 @@
-# 🚀 CareerTwin
+# 🚀 SkillStupor
 
 ### An AI-Powered Career Development & Skill Verification Platform
 
